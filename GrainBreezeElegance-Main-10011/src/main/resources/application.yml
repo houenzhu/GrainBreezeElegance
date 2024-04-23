@@ -1,0 +1,30 @@
+server:
+  port: 10011
+spring:
+  application:
+    name: GrainBreezeElegance-Main-10011
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  redis:
+    port: 6379
+    host: 192.168.56.100
+    connect-timeout: 10000ms
+    lettuce:
+      pool:
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+        max-active: 8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
