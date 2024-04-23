@@ -9,4 +9,5 @@ import com.zhe.grain.entity.AdminEntity;
  */
 
 public interface AdminMapper extends BaseMapper<AdminEntity> {
+    
 }

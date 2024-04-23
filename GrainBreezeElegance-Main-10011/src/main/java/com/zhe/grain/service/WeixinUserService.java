@@ -9,6 +9,5 @@ import org.springframework.stereotype.Service;
  * @Author 朱厚恩
  */
 
-@Service
 public interface WeixinUserService extends IService<WeixinUserEntity> {
 }
