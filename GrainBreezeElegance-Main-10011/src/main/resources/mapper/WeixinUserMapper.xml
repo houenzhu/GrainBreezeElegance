@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhe.grain.mapper.WeixinUserMapper">
+    <resultMap id="BaseResultMap" type="com.zhe.grain.entity.WeixinUserEntity">
+        <id column="id" property="id" javaType="java.lang.Integer"/>
+        <result column="user_name" property="userName" javaType="java.lang.String"/>
+        <result column="tel_number" property="telNumber" javaType="java.lang.String"/>
+        <result column="avatar_url" property="avatarUrl" javaType="java.lang.String"/>
+        <result column="province_name" property="provinceName" javaType="java.lang.String"/>
+        <result column="city_name" property="cityName" javaType="java.lang.String"/>
+        <result column="country_name" property="countryName" javaType="java.lang.String"/>
+        <result column="detail_info" property="detailInfo" javaType="java.lang.String"/>
+        <result column="create_time" property="createTime" javaType="java.util.Date"/>
+        <result column="login_time" property="loginTime" javaType="java.util.Date"/>
+    </resultMap>
+</mapper>
