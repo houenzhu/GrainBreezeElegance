@@ -2,10 +2,16 @@ server:
   port: 10010
 spring:
   application:
-    name: GrainBreezeGateway-10010
+    name: grain-breeze-gateway-10010
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
-        username: nacos
-        password: nacos
+        server-addr: localhost:8848
+    gateway:
+      routes:
+        - id: grain-breeze-service-route
+          uri: lb://grain-breeze-elegance-main-10011
+          predicates:
+            - Path=/api/grain/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}

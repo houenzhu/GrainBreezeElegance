@@ -20,7 +20,8 @@ public enum ResultMsgEnum {
     LOGIN_SUCCESS(HttpStatus.OK.value(), "登录成功"),
     LOGIN_ERROR(HttpStatus.INTERNAL_SERVER_ERROR.value(), "登陆失败, 请检查用户名或密码!"),
     PASSWORD_ERROR(HttpStatus.FORBIDDEN.value(), "密码错误!"),
-    INVALID_COOKIE(HttpStatus.FORBIDDEN.value(), "未登录, 请重新登录"),
+    INVALID_COOKIE(HttpStatus.FORBIDDEN.value(), "未登录, 请重新登录!"),
+    CHECK_CAPTCHA_ERROR(HttpStatus.FORBIDDEN.value(), "验证码有误, 请重新输入！"),
 
     // 注册枚举
     REGISTER_SUCCESS(HttpStatus.OK.value(), "注册成功!"),

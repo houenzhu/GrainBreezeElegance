@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Result<T> {
     private Integer code;
-    private String resultMsgEnum;
+    private String message;
     private T data;
 
     public static <T> Result<T> success() {

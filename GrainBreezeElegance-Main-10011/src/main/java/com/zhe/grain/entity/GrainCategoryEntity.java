@@ -10,60 +10,57 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @version 1.0
  * @Author 朱厚恩
+ * 商品分类实体
  */
 
-@TableName("weixin_user")
+@TableName("grain_category")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Accessors(chain = true)
-public class WeixinUserEntity implements Serializable {
+@Accessors(chain = true) // 链式调用
+public class GrainCategoryEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
     /**
-     * 微信用户id
+     * 主键id
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Long id;
     /**
-     * 微信用户名
+     * 分类名称
      */
-    private String userName;
+    private String name;
     /**
-     * 电话号码
+     * 父级id
      */
-    private String telNumber;
+    private Long parentId;
     /**
-     * 微信头像
+     * 层级
      */
-    private String avatarUrl;
+    private Integer catLevel;
     /**
-     * 省份
+     * 是否显示 0 不显示 1 显示
      */
-    private String provinceName;
+    private Integer isShow;
     /**
-     * 市
+     * 排序
      */
-    private String cityName;
+    private Integer sort;
     /**
-     * 区
+     * 图标
      */
-    private String countryName;
+    private String icon;
     /**
-     * 详细地址
+     * 统计单位
      */
-    private String detailInfo;
+    private String proUnit;
     /**
-     * 创建时间
+     * 商品数量
      */
-    private Date createTime;
-    /**
-     * 登录时间
-     */
-    private Date loginTime;
+    private Integer proCount;
 }

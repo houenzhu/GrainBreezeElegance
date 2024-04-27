@@ -2,7 +2,7 @@ server:
   port: 10011
 spring:
   application:
-    name: GrainBreezeElegance-Main-10011
+    name: grain-breeze-elegance-main-10011
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
@@ -21,10 +21,9 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
-        username: nacos
-        password: nacos
+        server-addr: localhost:8848
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: com.zhe.grain.entity

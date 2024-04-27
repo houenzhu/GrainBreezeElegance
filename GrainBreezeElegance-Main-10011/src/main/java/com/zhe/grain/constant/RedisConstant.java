@@ -7,6 +7,11 @@ package com.zhe.grain.constant;
  */
 
 public interface RedisConstant {
-    String USER_TICKET_PREFIX = "user:ticket:";
     String USER_TICKET_POSTFIX = "Bearer-";
+
+    // 存放用户实体的key
+    String USER_ENTITY_KEY = "admin:user:";
+
+    // 验证码的key
+    String CAPTCHA_KEY = "captcha:";
 }

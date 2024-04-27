@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zhe.grain.mapper.WeixinUserMapper">
-    <resultMap id="BaseResultMap" type="com.zhe.grain.entity.WeixinUserEntity">
+    <resultMap id="BaseResultMap" type="WeixinUserEntity">
         <id column="id" property="id" javaType="java.lang.Integer"/>
         <result column="user_name" property="userName" javaType="java.lang.String"/>
         <result column="tel_number" property="telNumber" javaType="java.lang.String"/>
