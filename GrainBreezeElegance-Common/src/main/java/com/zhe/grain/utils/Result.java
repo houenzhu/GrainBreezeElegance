@@ -1,4 +1,4 @@
-package com.zhe.grain.vo;
+package com.zhe.grain.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

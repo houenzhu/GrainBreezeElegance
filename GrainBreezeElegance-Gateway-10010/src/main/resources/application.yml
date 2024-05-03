@@ -15,3 +15,9 @@ spring:
             - Path=/api/grain/**
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment}
+        - id: grain-breeze-oss-route
+          uri: lb://grain-breeze-elegance-service-10012
+          predicates:
+            - Path=/api/service/**
+          filters: # /api/service/** -> /**
+            - RewritePath=/api/service/(?<segment>.*), /$\{segment}

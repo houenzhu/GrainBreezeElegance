@@ -1,0 +1,19 @@
+spring:
+  cloud:
+    util:
+      enabled: false
+    nacos:
+      config:
+        namespace: 026a78d6-aa79-4b05-bf38-5e5aab53be56
+        server-addr: 127.0.0.1:8848
+        group: dev
+        ext-config[0]:
+          data-id: grain-service.yml # 指定dataId
+          refresh: true # 实时刷新
+          group: dev
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: grain-breeze-elegance-service-10012
+server:
+  port: 10012

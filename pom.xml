@@ -12,6 +12,8 @@
     <modules>
         <module>GrainBreezeElegance-Gateway-10010</module>
         <module>GrainBreezeElegance-Main-10011</module>
+        <module>GrainBreezeElegance-OssService-10012</module>
+        <module>GrainBreezeElegance-Common</module>
     </modules>
 
     <properties>

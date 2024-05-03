@@ -27,3 +27,8 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   type-aliases-package: com.zhe.grain.entity
+  global-config:
+    db-config:
+      id-type: auto # 主键策略（自增）
+      logic-delete-value: 0 # 逻辑删除值
+      logic-not-delete-value: 1 # 未删除值

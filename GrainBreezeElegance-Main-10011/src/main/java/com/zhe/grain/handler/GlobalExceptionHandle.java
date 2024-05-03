@@ -2,8 +2,8 @@ package com.zhe.grain.handler;
 
 import com.zhe.grain.exception.CaptchaException;
 import com.zhe.grain.exception.LoginException;
-import com.zhe.grain.vo.Result;
-import com.zhe.grain.vo.ResultMsgEnum;
+import com.zhe.grain.utils.Result;
+import com.zhe.grain.utils.ResultMsgEnum;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,10 +21,10 @@ public class GlobalExceptionHandle {
      * @param e
      * @return
      */
-    @ExceptionHandler(value = Exception.class)
-    public Result<String> globalException(Exception e) {
-        return Result.error(ResultMsgEnum.ERROR, null);
-    }
+//    @ExceptionHandler(value = Exception.class)
+//    public Result<String> globalException(Exception e) {
+//        return Result.error(ResultMsgEnum.ERROR, null);
+//    }
 
     @ExceptionHandler(value = LoginException.class)
     public Result<String> loginException(LoginException e) {

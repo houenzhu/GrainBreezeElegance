@@ -2,15 +2,12 @@ package com.zhe.grain.interceptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhe.grain.annotation.AdminLoginAnnotation;
-import com.zhe.grain.constant.CookieConstant;
 import com.zhe.grain.entity.AdminEntity;
 import com.zhe.grain.service.AdminService;
-import com.zhe.grain.utils.CookieUtil;
+import com.zhe.grain.utils.Result;
+import com.zhe.grain.utils.ResultMsgEnum;
 import com.zhe.grain.utils.ThreadLocalUtil;
-import com.zhe.grain.vo.Result;
-import com.zhe.grain.vo.ResultMsgEnum;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;

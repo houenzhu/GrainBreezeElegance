@@ -1,8 +1,6 @@
 package com.zhe.grain.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -46,6 +45,7 @@ public class GrainCategoryEntity implements Serializable {
     /**
      * 是否显示 0 不显示 1 显示
      */
+    @TableLogic
     private Integer isShow;
     /**
      * 排序
@@ -63,4 +63,10 @@ public class GrainCategoryEntity implements Serializable {
      * 商品数量
      */
     private Integer proCount;
+
+    /**
+     * 子分类
+     */
+    @TableField(exist = false)
+    private List<GrainCategoryEntity> children;
 }

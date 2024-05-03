@@ -1,4 +1,4 @@
-package com.zhe.grain.vo;
+package com.zhe.grain.utils;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
