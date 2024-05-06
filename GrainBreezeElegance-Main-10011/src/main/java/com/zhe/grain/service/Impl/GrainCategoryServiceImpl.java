@@ -43,12 +43,16 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
         return listTree;
     }
 
+    /**
+     * 添加节点
+     * @param grainCategoryEntity
+     */
     @Override
-    public void addTopNode(GrainCategoryEntity grainCategoryEntity) {
+    public void addNode(GrainCategoryEntity grainCategoryEntity) {
         if (grainCategoryEntity.getParentId() == null) {
             return;
         }
-        save(grainCategoryEntity);
+        grainCategoryMapper.insert(grainCategoryEntity);
     }
 
     /**

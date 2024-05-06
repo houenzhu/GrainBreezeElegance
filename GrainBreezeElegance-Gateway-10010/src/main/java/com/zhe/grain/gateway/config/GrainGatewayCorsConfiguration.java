@@ -16,7 +16,6 @@ public class GrainGatewayCorsConfiguration {
 
     @Bean
     public CorsWebFilter corsWebFilter() {
-        System.out.println("跨域。。。");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         //1、配置跨域

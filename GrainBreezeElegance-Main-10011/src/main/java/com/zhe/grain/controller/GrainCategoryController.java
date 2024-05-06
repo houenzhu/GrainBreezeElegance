@@ -1,5 +1,6 @@
 package com.zhe.grain.controller;
 
+import com.zhe.grain.annotation.AdminLoginAnnotation;
 import com.zhe.grain.entity.GrainCategoryEntity;
 import com.zhe.grain.service.GrainCategoryService;
 import com.zhe.grain.utils.Result;
@@ -23,14 +24,21 @@ public class GrainCategoryController {
     private GrainCategoryService grainCategoryService;
 
     @GetMapping("/treeList")
+    @AdminLoginAnnotation
     public Result<List<GrainCategoryEntity>> getCategoryTreeList() {
         List<GrainCategoryEntity> categoryList = grainCategoryService.getCategoryList();
         return Result.success(categoryList);
     }
 
-    @PostMapping("/addTopNode")
+    /**
+     * 添加结点
+     * @param grainCategoryEntity
+     * @return
+     */
+    @PostMapping("/addNode")
+    @AdminLoginAnnotation
     public Result<Object> addTopNode(@RequestBody GrainCategoryEntity grainCategoryEntity) {
-        grainCategoryService.addTopNode(grainCategoryEntity);
+        grainCategoryService.addNode(grainCategoryEntity);
         return Result.success();
     }
 
@@ -39,9 +47,33 @@ public class GrainCategoryController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
+    @AdminLoginAnnotation
     public Result<Object> deleteNodes(@RequestBody Long[] ids) {
         grainCategoryService.removeBatchByIds(Arrays.asList(ids));
+        return Result.success();
+    }
+
+    /**
+     * 通过id查找商品分类
+     * @param id
+     * @return
+     */
+    @GetMapping("/getCategoryById")
+    @AdminLoginAnnotation
+    public Result<GrainCategoryEntity> getCategoryById(@RequestParam("id") Long id) {
+        return Result.success(grainCategoryService.getById(id));
+    }
+
+    /**
+     * 更新结点信息
+     * @param grainCategoryEntity
+     * @return
+     */
+    @PostMapping("/update")
+    @AdminLoginAnnotation
+    public Result<Object> update(@RequestBody GrainCategoryEntity grainCategoryEntity) {
+        grainCategoryService.updateById(grainCategoryEntity);
         return Result.success();
     }
 }

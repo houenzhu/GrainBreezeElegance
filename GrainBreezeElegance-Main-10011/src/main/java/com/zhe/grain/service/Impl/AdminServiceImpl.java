@@ -113,4 +113,23 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, AdminEntity>
         return (AdminEntity) redisTemplate.opsForValue()
                 .get(RedisConstant.USER_ENTITY_KEY + header);
     }
+
+    /**
+     * 管理员注销登录接口
+     * @param token
+     * @return
+     */
+    @Override
+    public boolean logout(String token) {
+        // 1. 先从redis查询是否有该用户, 没有则直接返回false
+        if (!StringUtils.hasText(token)) {
+            return false;
+        }
+        String key = RedisConstant.USER_ENTITY_KEY + token;
+        AdminEntity adminEntity = (AdminEntity) redisTemplate.opsForValue().get(key);
+        if (null == adminEntity) {
+            return false;
+        }
+        return Boolean.TRUE.equals(redisTemplate.delete(key));
+    }
 }

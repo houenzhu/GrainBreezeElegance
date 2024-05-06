@@ -19,9 +19,9 @@ public interface GrainCategoryService extends IService<GrainCategoryEntity> {
     List<GrainCategoryEntity> getCategoryList();
 
     /**
-     * 添加顶级结点
+     * 添加结点
      * @param grainCategoryEntity
      */
-    void addTopNode(GrainCategoryEntity grainCategoryEntity);
+    void addNode(GrainCategoryEntity grainCategoryEntity);
 
 }

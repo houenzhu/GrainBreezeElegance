@@ -9,6 +9,7 @@ import com.zhe.grain.entity.AdminEntity;
 import com.zhe.grain.exception.LoginException;
 import com.zhe.grain.service.AdminService;
 import com.zhe.grain.utils.Result;
+import com.zhe.grain.utils.ResultMsgEnum;
 import com.zhe.grain.vo.AdminLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +67,35 @@ public class AdminController {
         log.info("session的验证码 = {}", request.getSession().getAttribute("happy-captcha").toString());
     }
 
-    @GetMapping("/test")
+    /**
+     * 退出登录
+     * @return
+     */
+    @PostMapping("/logout")
     @AdminLoginAnnotation
-    public Result<Object> test(AdminEntity adminEntity) {
-        return Result.success(adminEntity);
+    public Result<Object> logout(@RequestParam String adminToken) {
+        if (adminService.logout(adminToken)) {
+            return Result.success(ResultMsgEnum.LOGOUT_SUCCESS, null);
+        } else {
+            return Result.error(ResultMsgEnum.LOGOUT_ERROR, null);
+        }
     }
+
+    /**
+     * 获取管理员个人信息
+     * @return
+     */
+    @GetMapping("/getAdminInfo")
+    @AdminLoginAnnotation
+    public Result<AdminEntity> getAdminInfo(@RequestParam String adminToken) {
+        AdminEntity admin = adminService.getAdminByHeader(adminToken);
+        if (null == admin) {
+            return Result.error();
+        } else {
+            return Result.success(admin);
+        }
+    }
+
 
     @GetMapping("/t1")
     @AdminLoginAnnotation

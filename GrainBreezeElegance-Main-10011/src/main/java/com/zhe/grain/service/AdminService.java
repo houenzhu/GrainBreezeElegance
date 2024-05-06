@@ -20,4 +20,9 @@ public interface AdminService extends IService<AdminEntity> {
 
 
     AdminEntity getAdminByHeader(String header);
+
+    // 注销登录接口
+    boolean logout(String token);
+
+
 }
