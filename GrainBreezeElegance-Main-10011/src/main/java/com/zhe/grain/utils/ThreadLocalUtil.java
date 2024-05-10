@@ -2,6 +2,8 @@ package com.zhe.grain.utils;
 
 import com.zhe.grain.entity.AdminEntity;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @version 1.0
  * @Author 朱厚恩
@@ -19,5 +21,7 @@ public class ThreadLocalUtil {
     public static AdminEntity getThreadLocalVal() {
         return THREAD_LOCAL.get();
     }
+
+
 
 }

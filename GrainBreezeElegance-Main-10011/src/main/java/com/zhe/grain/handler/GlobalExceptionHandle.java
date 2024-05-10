@@ -1,5 +1,6 @@
 package com.zhe.grain.handler;
 
+import com.zhe.grain.exception.AIException;
 import com.zhe.grain.exception.CaptchaException;
 import com.zhe.grain.exception.LoginException;
 import com.zhe.grain.utils.Result;
@@ -35,5 +36,10 @@ public class GlobalExceptionHandle {
     @ExceptionHandler(value = CaptchaException.class)
     public Result<String> captchaException(CaptchaException e) {
         return Result.error(ResultMsgEnum.CHECK_CAPTCHA_ERROR, null);
+    }
+
+    @ExceptionHandler(value = AIException.class)
+    public Result<String> aiException(AIException e) {
+        return Result.error(ResultMsgEnum.ERROR, e.getMessage(), null);
     }
 }

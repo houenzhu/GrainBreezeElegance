@@ -7,7 +7,10 @@ import com.zhe.grain.service.AdminService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.utils.ResultMsgEnum;
 import com.zhe.grain.utils.ThreadLocalUtil;
+import com.zhe.grain.utils.WebUtil;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
@@ -30,10 +33,15 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     // 调用controller方法前先执行该前置处理器
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(@NotNull HttpServletRequest request,
+                             @NotNull HttpServletResponse response, @NotNull Object handler)
+            throws Exception {
+        // 注入response，主要用于rabbitmq
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 获取该方法上的注解
@@ -51,7 +59,7 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
             AdminEntity admin = this.getAdmin(header);
             if (admin == null) {
                 // 未登录
-                this.render(response, ResultMsgEnum.INVALID_COOKIE);
+                WebUtil.render(response, Result.error(ResultMsgEnum.INVALID_COOKIE, null));
                 return false;
             }
             // 如果存在, 将admin对象存入threadLocal
@@ -60,16 +68,7 @@ public class AdminAccessInterceptor implements HandlerInterceptor {
         return true;
     }
 
-    // 构建返回对象, 以流的形式
-    private void render(HttpServletResponse response, ResultMsgEnum resultMsgEnum) throws IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter writer = response.getWriter();
-        Result<ResultMsgEnum> error = Result.error(resultMsgEnum);
-        writer.write(new ObjectMapper().writeValueAsString(error));
-        writer.flush();
-        writer.close();
-    }
+
 
     /**
      * 通过ticket获取管理员实体类

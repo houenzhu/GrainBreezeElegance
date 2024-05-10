@@ -2,6 +2,9 @@ package com.zhe.grain.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.entity.GrainBrandEntity;
+import com.zhe.grain.utils.PageUtils;
+
+import java.util.Map;
 
 /**
  * @version 1.0
@@ -10,4 +13,6 @@ import com.zhe.grain.entity.GrainBrandEntity;
 
 
 public interface GrainBrandService extends IService<GrainBrandEntity> {
+
+    PageUtils queryPage(Map<String, Object> params);
 }

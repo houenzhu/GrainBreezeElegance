@@ -28,6 +28,9 @@ public class Result<T> {
     public static <T> Result<T> success(ResultMsgEnum resultMsgEnum, T data) {
         return new Result<>(resultMsgEnum.getCode(), resultMsgEnum.getMsg(), data);
     }
+    public static <T> Result<T> success(ResultMsgEnum resultMsgEnum, String message, T data) {
+        return new Result<>(resultMsgEnum.getCode(), message, data);
+    }
 
     public static <T> Result<T> error() {
         return new Result<>(ResultMsgEnum.ERROR.getCode(), ResultMsgEnum.ERROR.getMsg(), null);
@@ -39,6 +42,10 @@ public class Result<T> {
 
     public static <T> Result<T> error(ResultMsgEnum resultMsgEnum, T data) {
         return new Result<>(resultMsgEnum.getCode(), resultMsgEnum.getMsg(), data);
+    }
+
+    public static <T> Result<T> error(ResultMsgEnum resultMsgEnum, String message, T data) {
+        return new Result<>(resultMsgEnum.getCode(), message, data);
     }
 
 }

@@ -14,4 +14,7 @@ public interface RedisConstant {
 
     // 验证码的key
     String CAPTCHA_KEY = "captcha:";
+
+    // 通义千问聊天记录
+    String TONG_YI_HISTORY = "chat:history:";
 }
