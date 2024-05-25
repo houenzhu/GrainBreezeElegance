@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @version 1.0
@@ -26,6 +28,17 @@ public class WebUtil {
         writer.write(new ObjectMapper().writeValueAsString(result));
         writer.flush();
         writer.close();
+    }
+
+    public static void changeStringToLong(Map<String, Object> map) {
+        Set<Map.Entry<String, Object>> entries =
+                map.entrySet();
+        entries.stream()
+                .forEach(entry -> {
+                    String key = entry.getKey();
+                    String value = (String) entry.getValue();
+                    map.put(key, Long.parseLong(value));
+                });
     }
 
 }
