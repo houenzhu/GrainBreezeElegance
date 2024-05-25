@@ -1,4 +1,4 @@
-package com.zhe.grain.service;
+package com.zhe.grain.service.commodity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.entity.GrainBrandEntity;
@@ -15,4 +15,10 @@ import java.util.Map;
 public interface GrainBrandService extends IService<GrainBrandEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 更新品牌数据
+     * @param grainBrandEntity
+     */
+    void update(GrainBrandEntity grainBrandEntity);
 }

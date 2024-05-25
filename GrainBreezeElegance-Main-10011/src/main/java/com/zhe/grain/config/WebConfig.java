@@ -20,15 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private AdminArgumentResolver adminArgumentResolver;
-
-    @Autowired
-    private AdminAccessInterceptor adminAccessInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(adminAccessInterceptor);
-    }
-
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.add(adminArgumentResolver);

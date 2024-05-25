@@ -1,6 +1,7 @@
 package com.zhe.grain.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -68,5 +69,7 @@ public class GrainCategoryEntity implements Serializable {
      * 子分类
      */
     @TableField(exist = false)
+    // 如果childrenCategories数组为空, 则不需要返回
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<GrainCategoryEntity> children;
 }

@@ -18,6 +18,7 @@ public class CodeGeneration {
         FastAutoGenerator.create("jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?&useSSL=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai","root","root")
                 .globalConfig(builder -> {
                     builder.author("houen_zhu")
+                            .fileOverride()
                             //启用swagger
                             //.enableSwagger()
                             //指定输出目录

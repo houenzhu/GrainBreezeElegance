@@ -1,6 +1,5 @@
 package com.zhe.grain.vo;
 
-import com.zhe.grain.entity.AdminEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +15,9 @@ import lombok.NoArgsConstructor;
 public class AdminLoginVO {
 
     /**
-     * 管理员手机号
+     * 管理员账号
      */
-    private String phone;
+    private String username;
 
     /**
      * 密码

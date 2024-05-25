@@ -1,14 +1,12 @@
-package com.zhe.grain.controller;
+package com.zhe.grain.controller.aichat;
 
-import com.zhe.grain.annotation.AdminLoginAnnotation;
-import com.zhe.grain.service.TongYiService;
+import com.zhe.grain.service.aichat.TongYiService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.Message;
 import com.zhe.grain.vo.TongYiResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @version 1.0
@@ -24,7 +22,7 @@ public class TongYiAiController {
     private TongYiService tongYiService;
 
     @PostMapping("/chat")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAnyAuthority('sys:ai:chat', 'weixin:ai:chat')")
     public Result<Object> askTongYi(@RequestBody Message message) {
         try {
             TongYiResultVO resultVO = tongYiService.askTongYi(message.getMessage());

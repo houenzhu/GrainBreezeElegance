@@ -1,7 +1,10 @@
-package com.zhe.grain.mapper;
+package com.zhe.grain.mapper.commodity;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zhe.grain.entity.GrainCategoryEntity;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @version 1.0
@@ -9,4 +12,5 @@ import com.zhe.grain.entity.GrainCategoryEntity;
  */
 
 public interface GrainCategoryMapper extends BaseMapper<GrainCategoryEntity> {
+    List<GrainCategoryEntity> getNotSelectedCategory(@Param("brandId") Long brandId);
 }

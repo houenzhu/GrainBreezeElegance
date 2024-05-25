@@ -1,4 +1,4 @@
-package com.zhe.grain.mapper;
+package com.zhe.grain.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zhe.grain.entity.WeixinUserEntity;

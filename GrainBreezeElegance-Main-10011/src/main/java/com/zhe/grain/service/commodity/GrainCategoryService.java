@@ -1,4 +1,4 @@
-package com.zhe.grain.service;
+package com.zhe.grain.service.commodity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.entity.GrainCategoryEntity;
@@ -23,5 +23,7 @@ public interface GrainCategoryService extends IService<GrainCategoryEntity> {
      * @param grainCategoryEntity
      */
     void addNode(GrainCategoryEntity grainCategoryEntity);
+
+    public List<GrainCategoryEntity> getChildrenByParentId(List<GrainCategoryEntity> all, GrainCategoryEntity root);
 
 }

@@ -1,9 +1,9 @@
-package com.zhe.grain.service.Impl;
+package com.zhe.grain.service.Impl.user;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.entity.WeixinUserEntity;
-import com.zhe.grain.mapper.WeixinUserMapper;
-import com.zhe.grain.service.WeixinUserService;
+import com.zhe.grain.mapper.user.WeixinUserMapper;
+import com.zhe.grain.service.user.WeixinUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,14 +1,14 @@
-package com.zhe.grain.service.Impl;
+package com.zhe.grain.service.Impl.commodity;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.entity.GrainCategoryEntity;
-import com.zhe.grain.mapper.GrainCategoryMapper;
-import com.zhe.grain.service.GrainCategoryService;
+import com.zhe.grain.mapper.commodity.GrainCategoryMapper;
+import com.zhe.grain.service.commodity.GrainCategoryService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,6 +52,11 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
         if (grainCategoryEntity.getParentId() == null) {
             return;
         }
+        grainCategoryEntity.setSort(1);
+        if (StringUtils.isBlank(grainCategoryEntity.getIcon())) {
+            grainCategoryEntity.setIcon("");
+        }
+        grainCategoryEntity.setProCount(0);
         grainCategoryMapper.insert(grainCategoryEntity);
     }
 
@@ -60,7 +65,8 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
      * @param all 所有的数据
      * @param root 根节点
      */
-    private List<GrainCategoryEntity> getChildrenByParentId(List<GrainCategoryEntity> all, GrainCategoryEntity root) {
+    @Override
+    public List<GrainCategoryEntity> getChildrenByParentId(List<GrainCategoryEntity> all, GrainCategoryEntity root) {
         List<GrainCategoryEntity> childrenTree = all.stream()
                 .filter(grainCategoryEntity -> grainCategoryEntity.getParentId().equals(root.getId()))
                 .map(grainCategoryEntity -> {

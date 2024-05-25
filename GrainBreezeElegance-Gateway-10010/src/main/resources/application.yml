@@ -1,6 +1,16 @@
 server:
   port: 10010
 spring:
+  redis:
+    port: 6379
+    host: 192.168.56.100
+    connect-timeout: 10000ms
+    lettuce:
+      pool:
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+        max-active: 8
   application:
     name: grain-breeze-gateway-10010
   cloud:

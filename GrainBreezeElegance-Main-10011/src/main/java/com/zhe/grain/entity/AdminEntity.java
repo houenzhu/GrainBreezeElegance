@@ -23,6 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
+@Deprecated
 public class AdminEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

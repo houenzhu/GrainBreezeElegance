@@ -1,4 +1,4 @@
-package com.zhe.grain.controller;
+package com.zhe.grain.controller.user;
 
 import com.ramostear.captcha.HappyCaptcha;
 import com.ramostear.captcha.common.Fonts;
@@ -6,14 +6,12 @@ import com.ramostear.captcha.support.CaptchaStyle;
 import com.ramostear.captcha.support.CaptchaType;
 import com.zhe.grain.annotation.AdminLoginAnnotation;
 import com.zhe.grain.entity.AdminEntity;
-import com.zhe.grain.exception.LoginException;
-import com.zhe.grain.service.AdminService;
+import com.zhe.grain.service.user.AdminService;
+import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
-import com.zhe.grain.utils.ResultMsgEnum;
-import com.zhe.grain.vo.AdminLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,26 +26,24 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/grain/admin")
 @Slf4j
+@Deprecated
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
+
+    @Autowired
+    private LoginUserService loginUserService;
 
 
     /**
      * 处理管理员登录接口
      * @return
      */
-    @PostMapping("/login")
-    public Result<String> adminLogin(@RequestBody AdminLoginVO adminLoginVO,
-                                     HttpServletRequest request,
-                                     HttpServletResponse response) {
-        String userTicket = adminService.adminLogin(adminLoginVO, request, response);
-        if (!StringUtils.hasText(userTicket)) {
-            throw new LoginException();
-        }
-        return Result.success(userTicket);
-    }
+//    @PostMapping("/login")
+//    public Result<Object> adminLogin(@RequestBody AdminLoginVO adminLoginVO) {
+//        return loginUserService.login(adminLoginVO);
+//    }
 
     /**
      * 生成验证码
@@ -56,6 +52,7 @@ public class AdminController {
      */
     @GetMapping("/captcha")
     public void HappyCaptcha(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("生成验证码...");
         HappyCaptcha.require(request, response)
                 .style(CaptchaStyle.ANIM)
                 .type(CaptchaType.NUMBER)
@@ -72,13 +69,8 @@ public class AdminController {
      * @return
      */
     @PostMapping("/logout")
-    @AdminLoginAnnotation
-    public Result<Object> logout(@RequestParam String adminToken) {
-        if (adminService.logout(adminToken)) {
-            return Result.success(ResultMsgEnum.LOGOUT_SUCCESS, null);
-        } else {
-            return Result.error(ResultMsgEnum.LOGOUT_ERROR, null);
-        }
+    public Result<Object> logout() {
+        return loginUserService.logout();
     }
 
     /**
@@ -98,7 +90,7 @@ public class AdminController {
 
 
     @GetMapping("/t1")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:dept:save')")
     public Result<Object> test1() {
         return Result.success("test1");
     }

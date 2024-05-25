@@ -1,8 +1,7 @@
-package com.zhe.grain.service;
+package com.zhe.grain.service.user;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.entity.WeixinUserEntity;
-import org.springframework.stereotype.Service;
 
 /**
  * @version 1.0

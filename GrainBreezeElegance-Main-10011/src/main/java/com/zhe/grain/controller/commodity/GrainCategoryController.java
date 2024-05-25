@@ -1,10 +1,10 @@
-package com.zhe.grain.controller;
+package com.zhe.grain.controller.commodity;
 
-import com.zhe.grain.annotation.AdminLoginAnnotation;
 import com.zhe.grain.entity.GrainCategoryEntity;
-import com.zhe.grain.service.GrainCategoryService;
+import com.zhe.grain.service.commodity.GrainCategoryService;
 import com.zhe.grain.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class GrainCategoryController {
     private GrainCategoryService grainCategoryService;
 
     @GetMapping("/treeList")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:category:list')")
     public Result<List<GrainCategoryEntity>> getCategoryTreeList() {
         List<GrainCategoryEntity> categoryList = grainCategoryService.getCategoryList();
         return Result.success(categoryList);
@@ -32,11 +32,12 @@ public class GrainCategoryController {
 
     /**
      * 添加结点
+     *
      * @param grainCategoryEntity
      * @return
      */
     @PostMapping("/addNode")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:category:addNode')")
     public Result<Object> addTopNode(@RequestBody GrainCategoryEntity grainCategoryEntity) {
         grainCategoryService.addNode(grainCategoryEntity);
         return Result.success();
@@ -44,11 +45,12 @@ public class GrainCategoryController {
 
     /**
      * 批量删除结点
+     *
      * @param ids
      * @return
      */
     @PostMapping("/delete")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:category:delete')")
     public Result<Object> deleteNodes(@RequestBody Long[] ids) {
         grainCategoryService.removeBatchByIds(Arrays.asList(ids));
         return Result.success();
@@ -56,22 +58,24 @@ public class GrainCategoryController {
 
     /**
      * 通过id查找商品分类
+     *
      * @param id
      * @return
      */
     @GetMapping("/getCategoryById")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:category:getCategoryById')")
     public Result<GrainCategoryEntity> getCategoryById(@RequestParam("id") Long id) {
         return Result.success(grainCategoryService.getById(id));
     }
 
     /**
      * 更新结点信息
+     *
      * @param grainCategoryEntity
      * @return
      */
     @PostMapping("/update")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:category:update')")
     public Result<Object> update(@RequestBody GrainCategoryEntity grainCategoryEntity) {
         grainCategoryService.updateById(grainCategoryEntity);
         return Result.success();

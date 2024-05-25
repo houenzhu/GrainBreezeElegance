@@ -1,4 +1,4 @@
-package com.zhe.grain.service;
+package com.zhe.grain.service.aichat;
 
 import com.zhe.grain.exception.AIException;
 import com.zhe.grain.vo.TongYiResultVO;

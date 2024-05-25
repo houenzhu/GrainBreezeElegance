@@ -1,13 +1,15 @@
-package com.zhe.grain.controller;
+package com.zhe.grain.controller.commodity;
 
-import com.zhe.grain.annotation.AdminLoginAnnotation;
 import com.zhe.grain.entity.GrainBrandEntity;
-import com.zhe.grain.service.GrainBrandService;
+import com.zhe.grain.exception.vaild.SaveGroup;
+import com.zhe.grain.service.commodity.GrainBrandService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Result;
-import com.zhe.grain.utils.WebUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,38 +22,49 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/grain/brand")
+@Slf4j
 public class GrainBrandController {
 
     @Autowired
     private GrainBrandService grainBrandService;
 
+    /**
+     * 品牌分页查询
+     *
+     * @param params
+     * @return
+     */
     @GetMapping("/list")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:brand:list')")
     public Result<Object> list(@RequestParam Map<String, Object> params) {
+        System.out.println("params = " + params);
         PageUtils page = grainBrandService.queryPage(params);
-        System.out.println("page = " + page);
+//        System.out.println("page = " + page);
         return Result.success(page);
     }
 
     /**
      * 通过id找唯一品牌
+     *
      * @param id id
      * @return
      */
     @GetMapping("/info/{id}")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:brand:info')")
     public Result<GrainBrandEntity> info(@PathVariable("id") Long id) {
         return Result.success(grainBrandService.getById(id));
     }
 
     /**
      * 保存
+     *
      * @param grainBrandEntity
      * @return
      */
     @PostMapping("/save")
-    @AdminLoginAnnotation
-    public Result<Object> save(@RequestBody GrainBrandEntity grainBrandEntity) {
+    @PreAuthorize("hasAuthority('sys:brand:save')")
+    public Result<Object> save(@Validated({SaveGroup.class})
+                                   @RequestBody GrainBrandEntity grainBrandEntity) {
         if (grainBrandService.save(grainBrandEntity)) {
             return Result.success(null);
         } else {
@@ -60,12 +73,25 @@ public class GrainBrandController {
     }
 
     @PostMapping("/remove")
-    @AdminLoginAnnotation
+    @PreAuthorize("hasAuthority('sys:brand:remove')")
     public Result<Object> remove(@RequestBody List<Long> ids) {
         if (grainBrandService.removeBatchByIds(ids)) {
             return Result.success(null);
         } else {
             return Result.error();
         }
+    }
+
+    /**
+     * 修改
+     *
+     * @param grainBrandEntity
+     * @return
+     */
+    @PostMapping("/update")
+    @PreAuthorize("hasAuthority('sys:brand:update')")
+    public Result<Object> update(@RequestBody GrainBrandEntity grainBrandEntity) {
+        grainBrandService.update(grainBrandEntity);
+        return Result.success();
     }
 }
