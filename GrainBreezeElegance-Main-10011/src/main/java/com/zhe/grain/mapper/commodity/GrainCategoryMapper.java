@@ -13,4 +13,7 @@ import java.util.List;
 
 public interface GrainCategoryMapper extends BaseMapper<GrainCategoryEntity> {
     List<GrainCategoryEntity> getNotSelectedCategory(@Param("brandId") Long brandId);
+    List<GrainCategoryEntity> getNotSelectedCategoryByAttrGroupId(@Param("attrGroupId") Long attrGroupId);
+    List<GrainCategoryEntity> getNotSelectedCategoryByAttrId(@Param("attrId") Long attrId);
+
 }

@@ -75,11 +75,8 @@ public class GrainBrandController {
     @PostMapping("/remove")
     @PreAuthorize("hasAuthority('sys:brand:remove')")
     public Result<Object> remove(@RequestBody List<Long> ids) {
-        if (grainBrandService.removeBatchByIds(ids)) {
-            return Result.success(null);
-        } else {
-            return Result.error();
-        }
+        grainBrandService.batchDeleteBrandIds(ids);
+        return Result.success(null);
     }
 
     /**

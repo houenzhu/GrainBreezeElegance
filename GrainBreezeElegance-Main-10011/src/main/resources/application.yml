@@ -53,6 +53,10 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:7777
+        port: 8719
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:

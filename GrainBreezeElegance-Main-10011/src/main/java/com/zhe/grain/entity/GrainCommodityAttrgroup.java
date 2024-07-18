@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -16,8 +18,9 @@ import lombok.experimental.Accessors;
  * @author houen_zhu
  * @since 2024-05-25
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("grain_commodity_attrgroup")
 public class GrainCommodityAttrgroup implements Serializable {
@@ -40,13 +43,5 @@ public class GrainCommodityAttrgroup implements Serializable {
      */
     private String description;
 
-    /**
-     * 组图标
-     */
-    private String icon;
 
-    /**
-     * 所属分类id
-     */
-    private Long categoryId;
 }

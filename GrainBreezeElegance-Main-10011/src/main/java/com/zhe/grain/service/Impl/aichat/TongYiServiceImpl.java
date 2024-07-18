@@ -8,10 +8,12 @@ import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
 import com.zhe.grain.constant.RedisConstant;
+import com.zhe.grain.entity.LoginUser;
 import com.zhe.grain.exception.AIException;
 import com.zhe.grain.service.aichat.TongYiService;
 import com.zhe.grain.utils.AIUtil;
 import com.zhe.grain.utils.RedisCache;
+import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.utils.ThreadLocalUtil;
 import com.zhe.grain.vo.TongYiResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +45,8 @@ public class TongYiServiceImpl implements TongYiService {
     public TongYiResultVO askTongYi(String message) {
         TongYiResultVO resultVO = null;
         List<Message> messages;
-        String key = RedisConstant.TONG_YI_HISTORY
-                + ThreadLocalUtil.getThreadLocalVal().getId();
+        LoginUser loginUser = (LoginUser) SecurityUtil.returnPrincipal();
+        String key = RedisConstant.TONG_YI_HISTORY + loginUser.getSysUser().getId();
         try {
             // "chat:history:1"
             messages = redisCache.getCacheObject(key);
@@ -59,7 +61,8 @@ public class TongYiServiceImpl implements TongYiService {
                 GenerationParam param = AIUtil.createGenerationParam(messages);
                 GenerationResult result = AIUtil.callGenerationWithMessages(param);
                 resultVO = AIUtil.ResultToVO(result);
-                System.out.println("模型输出：" + result.getOutput().getChoices().get(0).getMessage().getContent());
+                System.out.println("模型输出：" + result.getOutput().getChoices()
+                        .get(0).getMessage().getContent());
                 messages.add(result.getOutput().getChoices().get(0).getMessage());
                 redisCache.setCacheObject(key, messages, 30, TimeUnit.MINUTES);
             }

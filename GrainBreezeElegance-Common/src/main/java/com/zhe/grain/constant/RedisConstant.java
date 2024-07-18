@@ -17,4 +17,10 @@ public interface RedisConstant {
 
     // 通义千问聊天记录
     String TONG_YI_HISTORY = "chat:history:";
+
+    // 管理员权限
+    String ADMIN_PERMISSION = "admin:permission";
+
+    // 商品分类属性分类
+    String CATEGORY_LIST_TREE = "category:list:tree";
 }

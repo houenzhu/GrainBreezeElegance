@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.entity.GrainBrandEntity;
 import com.zhe.grain.utils.PageUtils;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,4 +22,10 @@ public interface GrainBrandService extends IService<GrainBrandEntity> {
      * @param grainBrandEntity
      */
     void update(GrainBrandEntity grainBrandEntity);
+
+    /**
+     * 批量删除品牌和之间的关联关系
+     * @param ids
+     */
+    void batchDeleteBrandIds(List<Long> ids);
 }

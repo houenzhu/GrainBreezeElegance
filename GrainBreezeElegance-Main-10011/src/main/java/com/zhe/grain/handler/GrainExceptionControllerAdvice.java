@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @version 1.0
@@ -20,7 +21,7 @@ public class GrainExceptionControllerAdvice {
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public Result<Object> handleValidException(MethodArgumentNotValidException e) {
-        HashMap<String, Object> errorMap = new HashMap<>();
+        Map<String, Object> errorMap = new HashMap<>();
         BindingResult bindingResult = e.getBindingResult();
         bindingResult.getFieldErrors().forEach(error -> {
             errorMap.put(error.getField(), error.getDefaultMessage());
@@ -32,6 +33,7 @@ public class GrainExceptionControllerAdvice {
     // Throwable顶级异常类
     @ExceptionHandler({Throwable.class})
     public Result<Object> handleException(Throwable throwable) {
+        log.error(throwable.getMessage());
         return Result.error();
     }
 }

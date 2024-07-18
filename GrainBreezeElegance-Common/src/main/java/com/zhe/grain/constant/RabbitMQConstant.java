@@ -8,14 +8,9 @@ package com.zhe.grain.constant;
 public interface RabbitMQConstant {
 
     /**
-     * 通义千问的队列1
+     * 商品队列及交换机
      */
-    String TONG_YI_QUEUE1 = "tongyi_queue1";
-
-    /**
-     * 同义的交换机
-     */
-    String TONG_YI_EXCHANGE = "Tongyi.TopExchange";
-
-    String TONG_YI_ROUTING_KEY = "#.tongyi.#";
+    String SPU_QUEUE = "spu_queue";
+    String SPU_EXCHANGE = "spu_exchange";
+    String SPU_ROUTING_KEY = "spu.#";
 }

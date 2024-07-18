@@ -15,7 +15,7 @@ import java.util.Date;
 /**
  * @version 1.0
  * @Author 朱厚恩
- * 管理员实体
+ * 管理员实体(已弃用)
  */
 
 @TableName("admin")

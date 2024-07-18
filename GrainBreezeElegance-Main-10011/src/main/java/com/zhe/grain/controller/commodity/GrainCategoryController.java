@@ -1,7 +1,9 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.RedisConstant;
 import com.zhe.grain.entity.GrainCategoryEntity;
 import com.zhe.grain.service.commodity.GrainCategoryService;
+import com.zhe.grain.utils.RedisCache;
 import com.zhe.grain.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +25,13 @@ public class GrainCategoryController {
     @Autowired
     private GrainCategoryService grainCategoryService;
 
+    @Autowired
+    private RedisCache redisCache;
+
+    /**
+     * 获取树形分类
+     * @return
+     */
     @GetMapping("/treeList")
     @PreAuthorize("hasAuthority('sys:category:list')")
     public Result<List<GrainCategoryEntity>> getCategoryTreeList() {
@@ -45,14 +54,13 @@ public class GrainCategoryController {
 
     /**
      * 批量删除结点
-     *
      * @param ids
      * @return
      */
     @PostMapping("/delete")
     @PreAuthorize("hasAuthority('sys:category:delete')")
-    public Result<Object> deleteNodes(@RequestBody Long[] ids) {
-        grainCategoryService.removeBatchByIds(Arrays.asList(ids));
+    public Result<Object> deleteNodes(@RequestBody List<Long> ids) {
+        grainCategoryService.batchDeleteNodes(ids);
         return Result.success();
     }
 
@@ -78,6 +86,7 @@ public class GrainCategoryController {
     @PreAuthorize("hasAuthority('sys:category:update')")
     public Result<Object> update(@RequestBody GrainCategoryEntity grainCategoryEntity) {
         grainCategoryService.updateById(grainCategoryEntity);
+        redisCache.deleteObject(RedisConstant.CATEGORY_LIST_TREE);
         return Result.success();
     }
 }

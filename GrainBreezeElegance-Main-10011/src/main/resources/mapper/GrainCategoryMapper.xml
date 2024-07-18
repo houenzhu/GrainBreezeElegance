@@ -28,4 +28,35 @@
                     brand_id = 1)
           AND g.is_show = 1
     </select>
+    <select id="getNotSelectedCategoryByAttrGroupId" resultType="com.zhe.grain.entity.GrainCategoryEntity">
+        SELECT
+            `id`, `name`, `parent_id`
+        FROM
+            `grain_category` AS g
+        WHERE
+                g.id NOT IN (
+                SELECT
+                    category_id
+                FROM
+                    `grain_commodity_attrgroup_category_relation` AS gc
+                WHERE
+                    gc.attr_group_id = #{attrGroupId})
+          AND g.is_show = 1
+    </select>
+    <select id="getNotSelectedCategoryByAttrId" resultType="com.zhe.grain.entity.GrainCategoryEntity">
+        SELECT g.id,
+               g.NAME,
+               g.`parent_id`
+        FROM `grain_category` AS g
+            where
+                g.id NOT IN (
+                SELECT
+                    category_id
+                FROM
+                    `grain_attr_category_relation`
+                AS gac
+                WHERE gac.attr_id = #{attrId}
+                )
+        AND g.is_show = 1
+    </select>
 </mapper>

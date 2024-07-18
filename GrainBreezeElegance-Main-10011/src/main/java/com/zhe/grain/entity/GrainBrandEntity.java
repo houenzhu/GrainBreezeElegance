@@ -51,9 +51,9 @@ public class GrainBrandEntity {
     /**
      * 是否显示[0-不显示，1显示]
      */
-    @NotNull(message = "是否显示不能为空", groups = {SaveGroup.class})
+//    @NotNull(message = "是否显示不能为空", groups = {SaveGroup.class})
     @EnumValidate(values = {0, 1}, message = "是否显示只能为0或1",
-            groups = {UpdateGroup.class, SaveGroup.class})
+            groups = {UpdateGroup.class})
     private Integer isShow;
     /**
      * 首字母检索

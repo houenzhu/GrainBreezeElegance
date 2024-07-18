@@ -24,6 +24,12 @@ public interface GrainCategoryService extends IService<GrainCategoryEntity> {
      */
     void addNode(GrainCategoryEntity grainCategoryEntity);
 
-    public List<GrainCategoryEntity> getChildrenByParentId(List<GrainCategoryEntity> all, GrainCategoryEntity root);
+    List<GrainCategoryEntity> getChildrenByParentId(List<GrainCategoryEntity> all, GrainCategoryEntity root);
+
+    /**
+     * 批量删除结点以及关联关系
+     * @param ids 选中的结点id
+     */
+    void batchDeleteNodes(List<Long> ids);
 
 }

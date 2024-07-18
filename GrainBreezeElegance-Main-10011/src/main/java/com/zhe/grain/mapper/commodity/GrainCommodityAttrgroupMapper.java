@@ -1,8 +1,10 @@
-package com.zhe.grain.mapper;
+package com.zhe.grain.mapper.commodity;
 
 import com.zhe.grain.entity.GrainCommodityAttrgroup;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,6 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-05-25
  */
 @Mapper
-public interface GrainCommodityAttrgroupMapper extends BaseMapper<GrainCommodityAttrgroup> {
+public interface GrainCommodityAttrgroupMapper
+        extends BaseMapper<GrainCommodityAttrgroup> {
 
 }

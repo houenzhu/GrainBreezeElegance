@@ -40,18 +40,20 @@ public class GrainCategoryBrandRelationController {
 
     /**
      * 根据品牌id查询所有关联关系
+     *
      * @param brandId
      * @return
      */
     @GetMapping("/findRelateByBrandId/{brandId}")
     @PreAuthorize("hasAuthority('sys:brand:findRelateByBrandId')")
     public Result<List<GrainCategoryBrandRelation>> findRelateByBrandId(@PathVariable("brandId")
-                                                                      Long brandId) {
+                                                                        Long brandId) {
         return grainCategoryBrainRelationService.showRelation(brandId);
     }
 
     /**
      * 获取没有关联过的分类信息
+     *
      * @param brandId
      * @return
      */
@@ -63,6 +65,7 @@ public class GrainCategoryBrandRelationController {
 
     /**
      * 删除关联关系
+     *
      * @param map
      * @return
      */
@@ -72,6 +75,13 @@ public class GrainCategoryBrandRelationController {
         WebUtil.changeStringToLong(map);
         Long id = (Long) map.get("id");
         return grainCategoryBrainRelationService.removeRelation(id);
+    }
+
+    @GetMapping("/brands/list/{categoryId}")
+    public Result<List<GrainCategoryBrandRelation>> getBrandsByCategoryId(@PathVariable("categoryId") Long categoryId) {
+        List<GrainCategoryBrandRelation> relations =
+                grainCategoryBrainRelationService.getRelationByCategoryId(categoryId);
+        return Result.success(relations);
     }
 
 }
