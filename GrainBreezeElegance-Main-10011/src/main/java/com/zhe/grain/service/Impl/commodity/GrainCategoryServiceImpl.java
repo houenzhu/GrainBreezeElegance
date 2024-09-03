@@ -1,10 +1,9 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.entity.*;
+import com.zhe.grain.domain.commodity.*;
 import com.zhe.grain.mapper.commodity.*;
 import com.zhe.grain.service.commodity.GrainCategoryService;
 import com.zhe.grain.utils.RedisCache;

@@ -1,6 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.GrainSaleAttrBrandRelation;
+import com.zhe.grain.domain.commodity.GrainSaleAttrBrandRelation;
 import com.zhe.grain.mapper.commodity.GrainBrandMapper;
 import com.zhe.grain.mapper.commodity.GrainSaleAttrBrandRelationMapper;
 import com.zhe.grain.service.commodity.GrainSaleAttrBrandRelationService;
@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>

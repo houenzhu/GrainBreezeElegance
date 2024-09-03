@@ -2,9 +2,9 @@ package com.zhe.grain.service.Impl.commodity;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.zhe.grain.entity.GrainBrandEntity;
-import com.zhe.grain.entity.GrainCategoryBrandRelation;
-import com.zhe.grain.entity.GrainCategoryEntity;
+import com.zhe.grain.domain.commodity.GrainBrandEntity;
+import com.zhe.grain.domain.commodity.GrainCategoryBrandRelation;
+import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.mapper.commodity.GrainBrandMapper;
 import com.zhe.grain.mapper.commodity.GrainCategoryBrandRelationMapper;
 import com.zhe.grain.mapper.commodity.GrainCategoryMapper;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhe.grain.mapper.commodity.GrainCategoryMapper">
-    <resultMap id="baseResultMapper" type="GrainCategoryEntity">
+    <resultMap id="baseResultMapper" type="com.zhe.grain.domain.commodity.GrainCategoryEntity">
         <id column="id" property="id"/>
         <result column="parent_id" property="parentId"/>
         <result column="cat_level" property="catLevel"/>
@@ -13,7 +13,7 @@
         <result column="icon" property="icon"/>
         <result column="sort" property="sort"/>
     </resultMap>
-    <select id="getNotSelectedCategory" resultType="GrainCategoryEntity" parameterType="Long">
+    <select id="getNotSelectedCategory" resultType="com.zhe.grain.domain.commodity.GrainCategoryEntity" parameterType="Long">
         SELECT
             *
         FROM
@@ -28,7 +28,7 @@
                     brand_id = 1)
           AND g.is_show = 1
     </select>
-    <select id="getNotSelectedCategoryByAttrGroupId" resultType="com.zhe.grain.entity.GrainCategoryEntity">
+    <select id="getNotSelectedCategoryByAttrGroupId" resultType="com.zhe.grain.domain.commodity.GrainCategoryEntity">
         SELECT
             `id`, `name`, `parent_id`
         FROM
@@ -43,7 +43,7 @@
                     gc.attr_group_id = #{attrGroupId})
           AND g.is_show = 1
     </select>
-    <select id="getNotSelectedCategoryByAttrId" resultType="com.zhe.grain.entity.GrainCategoryEntity">
+    <select id="getNotSelectedCategoryByAttrId" resultType="com.zhe.grain.domain.commodity.GrainCategoryEntity">
         SELECT g.id,
                g.NAME,
                g.`parent_id`

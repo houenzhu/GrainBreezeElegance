@@ -1,6 +1,6 @@
 package com.zhe.grain.service.commodity;
 
-import com.zhe.grain.entity.GrainSaleAttrBrandRelation;
+import com.zhe.grain.domain.commodity.GrainSaleAttrBrandRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

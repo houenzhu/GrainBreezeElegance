@@ -65,7 +65,7 @@ public class GlobalJwtTokenFilter implements GlobalFilter, Ordered {
         token = token.split(" ")[1];
         if (!checkToken(token)) {
             return MonoResponseUtil.monoResponse(exchange.getResponse(),
-                    Result.error(ResultMsgEnum.UNAUTHORIZED, "您的登录信息有误!", null));
+                    Result.error(ResultMsgEnum.UNAUTHORIZED, "您的登录信息有误!请刷新页面", null));
         }
         return chain.filter(exchange);
     }

@@ -1,7 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zhe.grain.mapper.commodity.GrainBrandMapper">
-    <resultMap id="BrainBaseMapper" type="GrainBrandEntity">
+    <resultMap id="BrainBaseMapper" type="com.zhe.grain.domain.commodity.GrainBrandEntity">
         <id column="id" property="id" javaType="Integer"/>
         <result column="name" property="name" javaType="String"/>
         <result column="logo" property="logo" javaType="String"/>

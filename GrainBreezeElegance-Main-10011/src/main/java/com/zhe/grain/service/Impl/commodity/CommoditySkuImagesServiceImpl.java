@@ -1,6 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.CommoditySkuImages;
+import com.zhe.grain.domain.commodity.CommoditySkuImages;
 import com.zhe.grain.mapper.commodity.CommoditySkuImagesMapper;
 import com.zhe.grain.service.commodity.CommoditySkuImagesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

@@ -1,8 +1,8 @@
 package com.zhe.grain.service.commodity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhe.grain.entity.GrainCategoryBrandRelation;
-import com.zhe.grain.entity.GrainCategoryEntity;
+import com.zhe.grain.domain.commodity.GrainCategoryBrandRelation;
+import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.utils.Result;
 
 import java.util.List;

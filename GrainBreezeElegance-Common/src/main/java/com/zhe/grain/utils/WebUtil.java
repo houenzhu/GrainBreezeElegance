@@ -5,8 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * @version 1.0
@@ -39,6 +42,12 @@ public class WebUtil {
                     String value = (String) entry.getValue();
                     map.put(key, Long.parseLong(value));
                 });
+    }
+
+    public static String returnTimeFormat() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        return format.format(new Date());
     }
 
 }

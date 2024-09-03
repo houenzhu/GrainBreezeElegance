@@ -1,6 +1,6 @@
 package com.zhe.grain.config;
 
-import com.zhe.grain.entity.AdminEntity;
+import com.zhe.grain.domain.user.AdminEntity;
 import com.zhe.grain.utils.ThreadLocalUtil;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

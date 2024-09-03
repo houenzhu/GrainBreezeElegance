@@ -1,7 +1,7 @@
 package com.zhe.grain.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhe.grain.entity.LoginUser;
+import com.zhe.grain.domain.LoginUser;
 
 /**
  * @version 1.0

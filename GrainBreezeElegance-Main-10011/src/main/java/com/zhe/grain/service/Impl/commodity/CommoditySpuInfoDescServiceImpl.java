@@ -1,6 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.CommoditySpuInfoDesc;
+import com.zhe.grain.domain.commodity.CommoditySpuInfoDesc;
 import com.zhe.grain.mapper.commodity.CommoditySpuInfoDescMapper;
 import com.zhe.grain.service.commodity.CommoditySpuInfoDescService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

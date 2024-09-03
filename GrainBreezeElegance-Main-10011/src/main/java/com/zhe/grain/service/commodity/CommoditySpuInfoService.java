@@ -1,8 +1,11 @@
 package com.zhe.grain.service.commodity;
 
-import com.zhe.grain.entity.CommoditySpuInfo;
+import com.zhe.grain.domain.commodity.CommoditySpuInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhe.grain.vo.SpuSaveVO;
+import com.zhe.grain.utils.PageUtils;
+import com.zhe.grain.vo.commodity.SpuSaveVO;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -25,4 +28,22 @@ public interface CommoditySpuInfoService extends IService<CommoditySpuInfo> {
      * @param spuSaveVO
      */
     void saveSpuInfo0(SpuSaveVO spuSaveVO);
+
+    /**
+     * 查询spu信息
+     * @param params 查询条件
+     * @return spu分页信息集合
+     */
+    PageUtils spuInfoList(Map<String, Object> params);
+
+    /**
+     * 产品上架
+     */
+    void productUp(Long spuId);
+
+    /**
+     * 产品下架
+     * @param spuId
+     */
+    void productDown(Long spuId);
 }

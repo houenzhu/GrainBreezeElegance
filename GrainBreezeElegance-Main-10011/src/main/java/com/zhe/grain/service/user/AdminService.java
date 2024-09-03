@@ -1,8 +1,8 @@
 package com.zhe.grain.service.user;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhe.grain.entity.AdminEntity;
-import com.zhe.grain.vo.AdminLoginVO;
+import com.zhe.grain.domain.user.AdminEntity;
+import com.zhe.grain.vo.user.AdminLoginVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author 朱厚恩
  */
 
+@Deprecated
 public interface AdminService extends IService<AdminEntity> {
     String adminLogin(AdminLoginVO adminLoginVO, HttpServletRequest request,
                       HttpServletResponse response);

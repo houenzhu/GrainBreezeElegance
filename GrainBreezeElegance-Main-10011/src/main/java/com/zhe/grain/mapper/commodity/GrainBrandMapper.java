@@ -1,7 +1,7 @@
 package com.zhe.grain.mapper.commodity;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhe.grain.entity.GrainBrandEntity;
+import com.zhe.grain.domain.commodity.GrainBrandEntity;
 
 /**
  * @version 1.0

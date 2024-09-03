@@ -1,16 +1,23 @@
 package com.zhe.grain.service.Impl.commodity;
 
 import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zhe.grain.entity.*;
+import com.zhe.grain.domain.commodity.*;
 import com.zhe.grain.mapper.commodity.CommoditySpuInfoMapper;
+import com.zhe.grain.mapper.commodity.GrainBrandMapper;
+import com.zhe.grain.mapper.commodity.GrainCategoryMapper;
 import com.zhe.grain.mapper.commodity.GrainCommodityAttrMapper;
 import com.zhe.grain.rabbit.provider.SpuProvider;
 import com.zhe.grain.service.commodity.*;
-import com.zhe.grain.vo.BaseAttrs;
-import com.zhe.grain.vo.Images;
-import com.zhe.grain.vo.Skus;
-import com.zhe.grain.vo.SpuSaveVO;
+import com.zhe.grain.utils.PageUtils;
+import com.zhe.grain.utils.Query;
+import com.zhe.grain.utils.WebUtil;
+import com.zhe.grain.vo.commodity.BaseAttrs;
+import com.zhe.grain.vo.commodity.Images;
+import com.zhe.grain.vo.commodity.Skus;
+import com.zhe.grain.vo.commodity.SpuSaveVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -22,6 +29,8 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -38,26 +47,43 @@ public class CommoditySpuInfoServiceImpl
         extends ServiceImpl<CommoditySpuInfoMapper, CommoditySpuInfo>
         implements CommoditySpuInfoService {
 
-    @Autowired
-    private SpuProvider spuProvider;
+    private final SpuProvider spuProvider;
+
+    private final CommoditySpuInfoDescService commoditySpuInfoDescService;
+
+    private final CommoditySpuImagesService commoditySpuImagesService;
+
+    private final GrainCommodityAttrMapper grainCommodityAttrMapper;
+
+    private final CommodityProductAttrValueService commodityProductAttrValueService;
+
+    private final CommoditySkuInfoService commoditySkuInfoService;
+
+    private final CommoditySkuImagesService commoditySkuImagesService;
+
+    private final GrainCategoryMapper grainCategoryMapper;
+    private final GrainBrandMapper grainBrandMapper;
 
     @Autowired
-    private CommoditySpuInfoDescService commoditySpuInfoDescService;
-
-    @Autowired
-    private CommoditySpuImagesService commoditySpuImagesService;
-
-    @Autowired
-    private GrainCommodityAttrMapper grainCommodityAttrMapper;
-
-    @Autowired
-    private CommodityProductAttrValueService commodityProductAttrValueService;
-
-    @Autowired
-    private CommoditySkuInfoService commoditySkuInfoService;
-
-    @Autowired
-    private CommoditySkuImagesService commoditySkuImagesService;
+    public CommoditySpuInfoServiceImpl(SpuProvider spuProvider,
+                                       CommoditySpuInfoDescService commoditySpuInfoDescService,
+                                       CommoditySpuImagesService commoditySpuImagesService,
+                                       GrainCommodityAttrMapper grainCommodityAttrMapper,
+                                       CommodityProductAttrValueService commodityProductAttrValueService,
+                                       CommoditySkuInfoService commoditySkuInfoService,
+                                       CommoditySkuImagesService commoditySkuImagesService,
+                                       GrainCategoryMapper grainCategoryMapper,
+                                       GrainBrandMapper grainBrandMapper) {
+        this.spuProvider = spuProvider;
+        this.commoditySpuInfoDescService = commoditySpuInfoDescService;
+        this.commoditySpuImagesService = commoditySpuImagesService;
+        this.grainCommodityAttrMapper = grainCommodityAttrMapper;
+        this.commodityProductAttrValueService = commodityProductAttrValueService;
+        this.commoditySkuInfoService = commoditySkuInfoService;
+        this.commoditySkuImagesService = commoditySkuImagesService;
+        this.grainCategoryMapper = grainCategoryMapper;
+        this.grainBrandMapper = grainBrandMapper;
+    }
 
     @Override
     public void saveSpuInfo(SpuSaveVO spuSaveVO) {
@@ -89,6 +115,78 @@ public class CommoditySpuInfoServiceImpl
         // 保存商品sku信息
         this.saveSkuInfo(spuSaveVO, spuId);
 
+    }
+
+    /**
+     * 方法实现
+     * @param params 查询条件
+     * @return
+     */
+    @Override
+    public PageUtils spuInfoList(Map<String, Object> params) {
+        // 提取查询条件
+        String status = (String) params.get("status");
+        String key = (String) params.get("key");
+        String brandId = (String) params.get("brandId");
+        String catelogId = (String) params.get("catelogId");
+        // 构造查询条件
+        LambdaQueryWrapper<CommoditySpuInfo> lambdaQueryWrapper =
+                new LambdaQueryWrapper<>();
+        if (StringUtils.isNotBlank(key) && !"undefined".equals(key)) {
+            lambdaQueryWrapper.eq(CommoditySpuInfo::getId, key)
+                    .or()
+                    .like(CommoditySpuInfo::getSpuName, key);
+        }
+        if (StringUtils.isNotBlank(status) && !"undefined".equals(status)) {
+            lambdaQueryWrapper.and(wrapper -> wrapper.eq(CommoditySpuInfo::getPublishStatus, status));
+        }
+        if (StringUtils.isNotBlank(brandId) && !"undefined".equals(brandId)  && !"0".equals(brandId)) {
+            lambdaQueryWrapper.and(wrapper -> wrapper.eq(CommoditySpuInfo::getBrandId, brandId));
+        }
+        if (StringUtils.isNotBlank(catelogId) && !"undefined".equals(catelogId) && !"0".equals(catelogId)) {
+            lambdaQueryWrapper.and(wrapper -> wrapper.eq(CommoditySpuInfo::getCatalogId, catelogId));
+        }
+        IPage<CommoditySpuInfo> page = this.page(
+                new Query<CommoditySpuInfo>().getPage(params),
+                lambdaQueryWrapper
+        );
+        // 拿到全部数据
+        List<CommoditySpuInfo> records = page.getRecords();
+        records.forEach(item -> {
+            Long brandId1 = item.getBrandId();
+            Long catalogId = item.getCatalogId();
+            String categoryName = grainCategoryMapper.selectById(catalogId).getName();
+            String brandName = grainBrandMapper.selectById(brandId1).getName();
+            item.setCategoryName(categoryName);
+            item.setBrandName(brandName);
+        });
+        return new PageUtils(page);
+    }
+
+    /**
+     * 产品上架
+     */
+    @Override
+    public void productUp(Long spuId) {
+        if (Objects.isNull(spuId) || spuId == 0L) {
+            return;
+        }
+        String time = WebUtil.returnTimeFormat();
+        // 上架
+        this.baseMapper.updatePublishStatus(spuId, 1, time);
+    }
+
+    /**
+     * 产品下架
+     */
+    @Override
+    public void productDown(Long spuId) {
+        if (Objects.isNull(spuId) || spuId == 0L) {
+            return;
+        }
+        String time = WebUtil.returnTimeFormat();
+        // 下架
+        this.baseMapper.updatePublishStatus(spuId, 2, time);
     }
 
     /**

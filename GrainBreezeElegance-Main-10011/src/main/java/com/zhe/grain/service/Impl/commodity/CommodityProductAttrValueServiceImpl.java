@@ -1,6 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.CommodityProductAttrValue;
+import com.zhe.grain.domain.commodity.CommodityProductAttrValue;
 import com.zhe.grain.mapper.commodity.CommodityProductAttrValueMapper;
 import com.zhe.grain.service.commodity.CommodityProductAttrValueService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

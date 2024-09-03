@@ -1,7 +1,7 @@
 package com.zhe.grain.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhe.grain.entity.AdminEntity;
+import com.zhe.grain.domain.user.AdminEntity;
 
 /**
  * @version 1.0

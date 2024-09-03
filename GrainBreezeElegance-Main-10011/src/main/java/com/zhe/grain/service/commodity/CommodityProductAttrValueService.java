@@ -1,6 +1,6 @@
 package com.zhe.grain.service.commodity;
 
-import com.zhe.grain.entity.CommodityProductAttrValue;
+import com.zhe.grain.domain.commodity.CommodityProductAttrValue;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

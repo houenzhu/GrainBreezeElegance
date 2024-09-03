@@ -1,7 +1,7 @@
 package com.zhe.grain.service.commodity;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhe.grain.entity.GrainBrandEntity;
+import com.zhe.grain.domain.commodity.GrainBrandEntity;
 import com.zhe.grain.utils.PageUtils;
 
 import java.util.List;

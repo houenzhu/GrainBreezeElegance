@@ -1,9 +1,11 @@
 package com.zhe.grain.service.commodity;
 
-import com.zhe.grain.entity.CommoditySkuInfo;
+import com.zhe.grain.domain.commodity.CommoditySkuInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zhe.grain.utils.PageUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -20,4 +22,9 @@ public interface CommoditySkuInfoService extends IService<CommoditySkuInfo> {
      * @param commoditySkuInfos
      */
     void batchSaveSpuInfo(List<CommoditySkuInfo> commoditySkuInfos);
+
+    /**
+     * sku信息列表
+     */
+    PageUtils skuInfoList(Map<String, Object> params);
 }

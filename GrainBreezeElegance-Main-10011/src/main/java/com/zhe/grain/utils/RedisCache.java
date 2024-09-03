@@ -1,10 +1,7 @@
 package com.zhe.grain.utils;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -213,7 +210,17 @@ public class RedisCache {
      * @param pattern 字符串前缀
      * @return 对象列表
      */
-    public Collection<String> keys(final String pattern) {
-        return redisTemplate.keys(pattern);
+    public Collection<String> keys(final String pattern, Integer count) {
+        ScanOptions scanOptions = ScanOptions.scanOptions().match(pattern)
+                .count(count).build();
+        Cursor cursor = redisTemplate.scan(scanOptions);
+        List<String> keys = new ArrayList<>();
+        while (cursor.hasNext()) {
+            Object next = cursor.next();
+            keys.add(String.valueOf(next));
+        }
+        return keys;
     }
+
+
 }

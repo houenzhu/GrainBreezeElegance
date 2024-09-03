@@ -1,7 +1,7 @@
 package com.zhe.grain.mapper.commodity;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhe.grain.entity.GrainCategoryEntity;
+import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

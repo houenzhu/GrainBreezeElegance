@@ -4,11 +4,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
@@ -21,7 +24,7 @@ public class JwtUtil {
     //有效期为
     public static final Long JWT_TTL = 60 * 60 * 1000L;// 60 * 60 *1000  一个小时
     //设置秘钥明文
-    public static final String JWT_KEY = "qx";
+    public static final String JWT_KEY = "zhu";
 
     public static String getUUID() {
         String token = UUID.randomUUID().toString().replaceAll("-", "");
@@ -93,7 +96,6 @@ public class JwtUtil {
         Claims claims = parseJWT(jwt);
         String subject = claims.getSubject();
 
-
         System.out.println(subject);
         System.out.println(jwt);
 
@@ -101,7 +103,6 @@ public class JwtUtil {
 
     /**
      * 生成加密后的秘钥 secretKey
-     *
      * @return
      */
     public static SecretKey generalKey() {
@@ -123,6 +124,17 @@ public class JwtUtil {
                 .setSigningKey(secretKey)
                 .parseClaimsJws(jwt)
                 .getBody();
+    }
+
+    public static String refreshToken(String token) {
+        String refreshedToken;
+        try {
+            final Claims claims = parseJWT(token);
+            refreshedToken = createJWT(claims.getId(), claims.getSubject(), JwtUtil.JWT_TTL);
+        } catch (Exception e) {
+            refreshedToken = null;
+        }
+        return refreshedToken;
     }
 
 

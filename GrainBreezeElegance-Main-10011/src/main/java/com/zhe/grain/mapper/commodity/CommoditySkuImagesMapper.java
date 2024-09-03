@@ -1,6 +1,6 @@
 package com.zhe.grain.mapper.commodity;
 
-import com.zhe.grain.entity.CommoditySkuImages;
+import com.zhe.grain.domain.commodity.CommoditySkuImages;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

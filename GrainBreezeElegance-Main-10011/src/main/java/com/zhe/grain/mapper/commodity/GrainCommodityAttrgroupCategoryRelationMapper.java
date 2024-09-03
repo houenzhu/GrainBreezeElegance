@@ -1,8 +1,7 @@
 package com.zhe.grain.mapper.commodity;
 
-import com.zhe.grain.entity.GrainCommodityAttrgroupCategoryRelation;
+import com.zhe.grain.domain.commodity.GrainCommodityAttrgroupCategoryRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

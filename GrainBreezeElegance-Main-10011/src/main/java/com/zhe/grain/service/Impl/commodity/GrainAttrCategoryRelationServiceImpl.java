@@ -2,8 +2,8 @@ package com.zhe.grain.service.Impl.commodity;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zhe.grain.entity.GrainAttrCategoryRelation;
-import com.zhe.grain.entity.GrainCategoryEntity;
+import com.zhe.grain.domain.commodity.GrainAttrCategoryRelation;
+import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.mapper.commodity.GrainAttrCategoryRelationMapper;
 import com.zhe.grain.mapper.commodity.GrainCategoryMapper;
 import com.zhe.grain.service.commodity.GrainAttrCategoryRelationService;

@@ -1,11 +1,13 @@
 package com.zhe.grain.filter;
 
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.entity.LoginUser;
+import com.zhe.grain.domain.LoginUser;
 import com.zhe.grain.utils.JwtUtil;
 import com.zhe.grain.utils.RedisCache;
 import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -33,6 +35,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @Autowired
     private RedisCache redisCache;
 
+    private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -56,8 +60,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                         null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 当有操作的时候进行时间重置
+        String jwt = JwtUtil.refreshToken(token);
         redisCache.setCacheObject(RedisConstant.USER_ENTITY_KEY + loginUser.getSysUser().getId(), loginUser,
                 60 * 60 * 1000, TimeUnit.MILLISECONDS);
+        response.setHeader("Authorization", jwt);
+        logger.info("重置jwt成功, {}", jwt);
         filterChain.doFilter(request, response);
     }
 

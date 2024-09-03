@@ -1,6 +1,6 @@
 package com.zhe.grain.utils;
 
-import com.zhe.grain.entity.AdminEntity;
+import com.zhe.grain.domain.user.AdminEntity;
 
 /**
  * @version 1.0

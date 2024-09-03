@@ -1,7 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.GrainCommodityAttr;
-import com.zhe.grain.entity.GrainCommodityAttrAttrgroupRelation;
+import com.zhe.grain.domain.commodity.GrainCommodityAttrAttrgroupRelation;
 import com.zhe.grain.mapper.commodity.GrainCommodityAttrAttrgroupRelationMapper;
 import com.zhe.grain.service.commodity.GrainCommodityAttrAttrgroupRelationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -10,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <p>

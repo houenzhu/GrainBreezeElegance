@@ -9,7 +9,7 @@ import com.alibaba.dashscope.common.Role;
 import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
-import com.zhe.grain.vo.TongYiResultVO;
+import com.zhe.grain.vo.tongyi.TongYiResultVO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.entity.CommoditySpuImages;
+import com.zhe.grain.domain.commodity.CommoditySpuImages;
 import com.zhe.grain.mapper.commodity.CommoditySpuImagesMapper;
 import com.zhe.grain.service.commodity.CommoditySpuImagesService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

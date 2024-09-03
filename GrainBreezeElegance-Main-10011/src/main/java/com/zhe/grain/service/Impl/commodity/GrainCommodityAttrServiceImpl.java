@@ -1,12 +1,10 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zhe.grain.entity.*;
+import com.zhe.grain.domain.commodity.*;
 import com.zhe.grain.mapper.commodity.*;
 import com.zhe.grain.service.commodity.GrainCommodityAttrAttrgroupRelationService;
 import com.zhe.grain.service.commodity.GrainCommodityAttrService;
@@ -14,9 +12,9 @@ import com.zhe.grain.service.commodity.GrainSaleAttrBrandRelationService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Query;
 import com.zhe.grain.utils.ReflectUtils;
-import com.zhe.grain.vo.BaseAttrAcceptVO;
-import com.zhe.grain.vo.BaseAttrFormVO;
-import com.zhe.grain.vo.GrainCommodityAttrVO;
+import com.zhe.grain.vo.commodity.BaseAttrAcceptVO;
+import com.zhe.grain.vo.commodity.BaseAttrFormVO;
+import com.zhe.grain.vo.commodity.GrainCommodityAttrVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * <p>

@@ -24,13 +24,13 @@ public class CodeGeneration {
                             //指定输出目录
                             .outputDir(System.getProperty("user.dir")+"/src/main/java");
                 }).packageConfig(builder -> {
-                    builder.entity("entity")//实体类包名
+                    builder.entity("domain.commodity")//实体类包名
                             .parent("com.zhe.grain")//父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
-                            .controller("controller")//控制层包名
-                            .mapper("mapper")//mapper层包名
+                            .controller("api.commodity")//控制层包名
+                            .mapper("mapper.commodity")//mapper层包名
                             //.other("dto")//生成dto目录 可不用
-                            .service("service")//service层包名
-                            .serviceImpl("service.Impl")//service实现类包名
+                            .service("service.commodity")//service层包名
+                            .serviceImpl("service.Impl.commodity")//service实现类包名
                             //自定义mapper.xml文件输出目录
                             .pathInfo(Collections.singletonMap(OutputFile.xml,System.getProperty("user.dir")+"/src/main/resources/mapper"));
                 }).strategyConfig(builder -> {

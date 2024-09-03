@@ -53,6 +53,7 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+        namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
     sentinel:
       transport:
         dashboard: localhost:7777
@@ -61,7 +62,6 @@ mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  type-aliases-package: com.zhe.grain.entity
   global-config:
     db-config:
       id-type: auto # 主键策略（自增）

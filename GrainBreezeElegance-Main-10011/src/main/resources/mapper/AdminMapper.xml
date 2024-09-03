@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.zhe.grain.mapper.user.AdminMapper">
-    <resultMap id="AdminBaseMap" type="AdminEntity">
+    <resultMap id="AdminBaseMap" type="com.zhe.grain.domain.user.AdminEntity">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="username" property="username" javaType="String"/>
         <result column="password" property="password" javaType="String"/>

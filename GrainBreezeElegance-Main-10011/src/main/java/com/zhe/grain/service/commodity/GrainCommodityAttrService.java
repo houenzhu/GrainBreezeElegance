@@ -1,12 +1,11 @@
 package com.zhe.grain.service.commodity;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.zhe.grain.entity.GrainCommodityAttr;
+import com.zhe.grain.domain.commodity.GrainCommodityAttr;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.utils.PageUtils;
-import com.zhe.grain.vo.BaseAttrAcceptVO;
-import com.zhe.grain.vo.BaseAttrFormVO;
-import com.zhe.grain.vo.GrainCommodityAttrVO;
+import com.zhe.grain.vo.commodity.BaseAttrAcceptVO;
+import com.zhe.grain.vo.commodity.BaseAttrFormVO;
+import com.zhe.grain.vo.commodity.GrainCommodityAttrVO;
 
 import java.util.List;
 import java.util.Map;

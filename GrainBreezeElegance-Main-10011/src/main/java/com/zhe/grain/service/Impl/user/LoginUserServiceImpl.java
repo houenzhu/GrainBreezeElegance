@@ -2,19 +2,18 @@ package com.zhe.grain.service.Impl.user;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.entity.LoginUser;
-import com.zhe.grain.entity.SysUser;
+import com.zhe.grain.domain.LoginUser;
+import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.mapper.user.LoginUserMapper;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.*;
-import com.zhe.grain.vo.AdminLoginVO;
+import com.zhe.grain.vo.user.AdminLoginVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +71,9 @@ public class LoginUserServiceImpl extends ServiceImpl<LoginUserMapper, LoginUser
     @Override
     public Result<Object> logout() {
         LoginUser loginUser = (LoginUser) SecurityUtil.returnPrincipal();
-        redisCache.deleteObject(RedisConstant.USER_ENTITY_KEY + loginUser.getSysUser().getId());
+        Long userId = loginUser.getSysUser().getId();
+        redisCache.deleteObject(RedisConstant.USER_ENTITY_KEY + userId);
+        redisCache.deleteObject(RedisConstant.ADMIN_PERMISSION);
         return Result.success(ResultMsgEnum.LOGOUT_SUCCESS, null);
     }
 

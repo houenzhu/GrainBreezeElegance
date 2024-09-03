@@ -1,7 +1,7 @@
 package com.zhe.grain.interceptor;
 
 import com.zhe.grain.annotation.AdminLoginAnnotation;
-import com.zhe.grain.entity.AdminEntity;
+import com.zhe.grain.domain.user.AdminEntity;
 import com.zhe.grain.service.user.AdminService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.utils.ResultMsgEnum;
