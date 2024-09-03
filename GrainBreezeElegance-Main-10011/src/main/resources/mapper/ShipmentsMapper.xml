@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhe.grain.mapper.commodity.ShipmentsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhe.grain.domain.commodity.Shipments">
+        <id column="shipment_id" property="shipmentId" />
+        <result column="order_id" property="orderId" />
+        <result column="tracking_number" property="trackingNumber" />
+        <result column="logistics_company" property="logisticsCompany" />
+        <result column="shipment_status" property="shipmentStatus" />
+        <result column="estimated_delivery_date" property="estimatedDeliveryDate" />
+        <result column="actual_delivery_date" property="actualDeliveryDate" />
+        <result column="shipping_date" property="shippingDate" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        shipment_id, order_id, tracking_number, logistics_company, shipment_status, estimated_delivery_date, actual_delivery_date, shipping_date, created_at, updated_at
+    </sql>
+
+</mapper>

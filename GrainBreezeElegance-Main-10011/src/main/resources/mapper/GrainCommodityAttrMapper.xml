@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhe.grain.mapper.commodity.GrainCommodityAttrMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhe.grain.domain.commodity.GrainCommodityAttr">
+        <id column="attr_id" property="attrId" />
+        <result column="attr_name" property="attrName" />
+        <result column="value_select" property="valueSelect" />
+        <result column="attr_type" property="attrType" />
+        <result column="enable" property="enable" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        attr_id, attr_name, value_select, attr_type, enable
+    </sql>
+    <select id="selectByAttrIds" resultType="com.zhe.grain.domain.commodity.GrainCommodityAttr">
+        select attr_id, attr_name, value_select from `grain_commodity_attr`
+        <where>
+            <foreach collection="ids" item="id" open="attr_id in (" separator=", " close=")">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+    <select id="selectNotInAttrIds" resultType="com.zhe.grain.domain.commodity.GrainCommodityAttr">
+        select attr_id, attr_name, value_select from `grain_commodity_attr`
+            <where>
+                <foreach collection="ids" item="id" open="attr_id not in (" separator=", "
+                         close=") and attr_type = 1">
+                    #{id}
+                </foreach>
+            </where>
+    </select>
+
+</mapper>

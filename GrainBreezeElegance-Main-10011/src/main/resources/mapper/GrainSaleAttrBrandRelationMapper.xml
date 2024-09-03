@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhe.grain.mapper.commodity.GrainSaleAttrBrandRelationMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhe.grain.domain.commodity.GrainSaleAttrBrandRelation">
+        <id column="id" property="id" />
+        <result column="sale_attr_id" property="saleAttrId" />
+        <result column="brand_id" property="brandId" />
+        <result column="brand_name" property="brandName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sale_attr_id, brand_id, brand_name
+    </sql>
+    <delete id="batchDeleteSaleAttrBrandRelation">
+        DELETE FROM `grain_sale_attr_brand_relation`
+        <foreach collection="attrIds" item="attrId" open="where sale_attr_id in ("
+                 separator=", " close=")">
+            #{attrId}
+        </foreach>
+    </delete>
+
+</mapper>

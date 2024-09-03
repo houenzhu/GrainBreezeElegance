@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhe.grain.mapper.commodity.CommoditySkuInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhe.grain.domain.commodity.CommoditySkuInfo">
+        <id column="sku_id" property="skuId"/>
+        <result column="spu_id" property="spuId"/>
+        <result column="sku_name" property="skuName"/>
+        <result column="sku_desc" property="skuDesc"/>
+        <result column="catalog_id" property="catalogId"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="sku_default_img" property="skuDefaultImg"/>
+        <result column="sku_title" property="skuTitle"/>
+        <result column="sku_subtitle" property="skuSubtitle"/>
+        <result column="price" property="price"/>
+        <result column="sale_count" property="saleCount"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        sku_id, spu_id, sku_name, sku_desc, catalog_id, brand_id, sku_default_img, sku_title, sku_subtitle, price, sale_count
+    </sql>
+
+</mapper>
