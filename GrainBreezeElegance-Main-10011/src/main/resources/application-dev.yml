@@ -61,11 +61,9 @@ spring:
   config:
     activate:
       on-profile: dev
-logging:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  config: classpath:logback.xml
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
@@ -75,3 +73,5 @@ mybatis-plus:
       id-type: auto # 主键策略（自增）
       logic-delete-value: 0 # 逻辑删除值
       logic-not-delete-value: 1 # 未删除值
+logging:
+  config: classpath:logback.xml

@@ -9,7 +9,7 @@
     <jmxConfigurator />
     <property name="charset" value="UTF-8"/>
     <!-- 定义日志文件 输出位置 -->
-    <property name="log_dir" value="D:\2024本科毕业设计\GraduationDesign\GrainBreezeElegance\Log" />
+    <property name="log_dir" value="Log" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30" />
     <!-- 单个日志文件的最大大小 -->
