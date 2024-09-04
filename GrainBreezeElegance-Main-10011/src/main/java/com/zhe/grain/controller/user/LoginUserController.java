@@ -1,4 +1,4 @@
-package com.zhe.grain.api.user;
+package com.zhe.grain.controller.user;
 
 import com.ramostear.captcha.HappyCaptcha;
 import com.ramostear.captcha.common.Fonts;

@@ -1,4 +1,4 @@
-package com.zhe.grain.api.user;
+package com.zhe.grain.controller.user;
 
 import com.zhe.grain.service.user.UserService;
 import com.zhe.grain.utils.PageUtils;

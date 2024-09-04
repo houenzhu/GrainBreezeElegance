@@ -1,4 +1,4 @@
-package com.zhe.grain.api.commodity;
+package com.zhe.grain.controller.commodity;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,18 +1,18 @@
-package com.zhe.grain.api.commodity;
+package com.zhe.grain.controller.commodity;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 商品spu信息介绍 前端控制器
+ * sku 图片 前端控制器
  * </p>
  *
  * @author houen_zhu
- * @since 2024-07-10
+ * @since 2024-07-13
  */
 @RestController
-@RequestMapping("/grain/spuInfoDesc")
-public class CommoditySpuInfoDescController {
+@RequestMapping("/commoditySkuImages")
+public class CommoditySkuImagesController {
 
 }

@@ -1,4 +1,4 @@
-package com.zhe.grain.api.user;
+package com.zhe.grain.controller.user;
 
 import com.zhe.grain.service.user.SysMenuService;
 import com.zhe.grain.utils.PageUtils;

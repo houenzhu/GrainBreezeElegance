@@ -1,4 +1,4 @@
-package com.zhe.grain.api.aichat;
+package com.zhe.grain.controller.aichat;
 
 import com.zhe.grain.service.aichat.TongYiService;
 import com.zhe.grain.utils.Result;

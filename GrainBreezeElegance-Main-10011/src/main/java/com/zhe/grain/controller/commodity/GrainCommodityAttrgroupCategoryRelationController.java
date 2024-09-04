@@ -1,4 +1,4 @@
-package com.zhe.grain.api.commodity;
+package com.zhe.grain.controller.commodity;
 
 import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.service.commodity.GrainCommodityAttrgroupCategoryRelationService;

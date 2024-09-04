@@ -1,18 +1,18 @@
-package com.zhe.grain.api.commodity;
+package com.zhe.grain.controller.user;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * sku 图片 前端控制器
+ *  前端控制器
  * </p>
  *
  * @author houen_zhu
- * @since 2024-07-13
+ * @since 2024-07-23
  */
 @RestController
-@RequestMapping("/commoditySkuImages")
-public class CommoditySkuImagesController {
+@RequestMapping("/sysUserRole")
+public class SysUserRoleController {
 
 }

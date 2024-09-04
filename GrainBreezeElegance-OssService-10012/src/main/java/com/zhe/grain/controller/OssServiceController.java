@@ -1,4 +1,4 @@
-package com.zhe.grain.api;
+package com.zhe.grain.controller;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.utils.BinaryUtil;
