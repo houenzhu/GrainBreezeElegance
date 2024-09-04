@@ -4,10 +4,10 @@ spring:
   application:
     name: grain-breeze-elegance-main-10011
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
-    username: root
-    password: root
+    driver-class-name: ${datasource.driver-class-name}
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
   redis:
     port: 6379
     host: 192.168.56.100
@@ -58,6 +58,9 @@ spring:
       transport:
         dashboard: localhost:7777
         port: 8719
+  config:
+    activate:
+      on-profile: prod
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
@@ -67,3 +70,5 @@ mybatis-plus:
       id-type: auto # 主键策略（自增）
       logic-delete-value: 0 # 逻辑删除值
       logic-not-delete-value: 1 # 未删除值
+logging:
+  config: classpath:logback.xml

@@ -1,0 +1,77 @@
+server:
+  port: 10011
+spring:
+  application:
+    name: grain-breeze-elegance-main-10011
+  datasource:
+    driver-class-name: ${datasource.driver-class-name}
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
+  redis:
+    port: 6379
+    host: 192.168.56.100
+    connect-timeout: 10000ms
+    lettuce:
+      pool:
+        max-wait: 10000ms
+        max-idle: 200
+        min-idle: 5
+        max-active: 8
+  rabbitmq:
+    host: 192.168.56.100
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    listener:
+      simple:
+        # 消费者的最小数量
+        concurrency: 10
+        # 消费者的最大数量
+        max-concurrency: 10
+        # 限制消费者, 每次只能处理一条消息, 相当于串行执行
+        prefetch: 1
+        # 启动时, 自动启动容器 默认true
+        auto-startup: true
+        # 消息背拒绝时, 重新进入消息队列
+        default-requeue-rejected: true
+    template:
+      retry:
+        # 启用重试机制
+        enabled: true
+        # 设置初始化重试时间间隔
+        initial-interval: 1000ms
+        # 重试最大次数, 默认3次
+        max-attempts: 3
+        # 重试最大时间间隔, 默认是10s
+        max-interval: 10000ms
+        # 重试时间间隔的乘数
+        # 如果配置2 第一次1s 第二次1 * 2s 第三次 1 * 2 * 2 ...
+        multiplier: 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
+    sentinel:
+      transport:
+        dashboard: localhost:7777
+        port: 8719
+  config:
+    activate:
+      on-profile: dev
+logging:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  config: classpath:logback.xml
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto # 主键策略（自增）
+      logic-delete-value: 0 # 逻辑删除值
+      logic-not-delete-value: 1 # 未删除值
