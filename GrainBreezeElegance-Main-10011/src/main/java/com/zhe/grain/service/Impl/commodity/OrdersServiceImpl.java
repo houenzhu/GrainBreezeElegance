@@ -2,7 +2,6 @@ package com.zhe.grain.service.Impl.commodity;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.domain.commodity.Orders;
 import com.zhe.grain.mapper.commodity.OrdersMapper;
@@ -11,9 +10,9 @@ import com.zhe.grain.service.commodity.OrdersService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Query;
 import com.zhe.grain.vo.commodity.OrderVO;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -28,16 +27,12 @@ import java.util.Map;
  * @since 2024-08-12
  */
 @Service
+@AllArgsConstructor
 public class OrdersServiceImpl
         extends ServiceImpl<OrdersMapper, Orders>
         implements OrdersService {
 
     private final UserMapper userMapper;
-
-    @Autowired
-    public OrdersServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
