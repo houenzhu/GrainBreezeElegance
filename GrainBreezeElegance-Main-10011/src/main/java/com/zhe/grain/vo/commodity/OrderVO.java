@@ -44,10 +44,6 @@ public class OrderVO implements Serializable {
 
     private String billingAddress;
 
-    private Long skuId;
-
-    private Integer quantity;
-
     private String trackingNumber;
 
     private Byte shippingMethod;

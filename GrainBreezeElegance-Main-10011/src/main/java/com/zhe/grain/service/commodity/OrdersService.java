@@ -3,7 +3,9 @@ package com.zhe.grain.service.commodity;
 import com.zhe.grain.domain.commodity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.utils.PageUtils;
+import com.zhe.grain.vo.commodity.SkusInfoVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,4 +24,11 @@ public interface OrdersService extends IService<Orders> {
      * @return
      */
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 生成订单
+     * zhu
+     * 2024/09/07
+     */
+    Orders saveOrders(List<SkusInfoVO> skusInfoVOList);
 }

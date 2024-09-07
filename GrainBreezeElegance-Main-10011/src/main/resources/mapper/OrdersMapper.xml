@@ -11,8 +11,6 @@
         <result column="payment_status" property="paymentStatus" />
         <result column="shipping_address" property="shippingAddress" />
         <result column="billing_address" property="billingAddress" />
-        <result column="sku_id" property="skuId" />
-        <result column="quantity" property="quantity" />
         <result column="tracking_number" property="trackingNumber" />
         <result column="shipping_method" property="shippingMethod" />
         <result column="created_at" property="createdAt" />
@@ -21,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        order_id, customer_id, total_amount, order_status, payment_status, shipping_address, billing_address, sku_id, quantity, tracking_number, shipping_method, created_at, updated_at
+        order_id, customer_id, total_amount, order_status, payment_status, shipping_address, billing_address, tracking_number, shipping_method, created_at, updated_at
     </sql>
 
 </mapper>

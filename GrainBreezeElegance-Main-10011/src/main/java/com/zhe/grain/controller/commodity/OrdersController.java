@@ -1,15 +1,15 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.domain.commodity.Orders;
 import com.zhe.grain.service.commodity.OrdersService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Result;
+import com.zhe.grain.vo.commodity.SkusInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,6 +36,13 @@ public class OrdersController {
     public Result<PageUtils> list(@RequestParam Map<String, Object> params) {
         PageUtils pageUtils = ordersService.queryPage(params);
         return Result.success(pageUtils);
+    }
+
+    @PostMapping("/saveOrder")
+    @PreAuthorize("@zhe.hasAuthority('user:order:save')")
+    public Result<Orders> saveOrder(@RequestBody List<SkusInfoVO> skusInfoVOList) {
+        Orders orders = ordersService.saveOrders(skusInfoVOList);
+        return Result.success("订单创建成功，请在10分钟内完成支付!", orders);
     }
 
 }

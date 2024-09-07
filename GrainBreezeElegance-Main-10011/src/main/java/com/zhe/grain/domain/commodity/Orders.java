@@ -60,16 +60,6 @@ public class Orders implements Serializable {
     private String billingAddress;
 
     /**
-     * SKU ID
-     */
-    private Long skuId;
-
-    /**
-     * 订单数量
-     */
-    private Integer quantity;
-
-    /**
      * 快递单号
      */
     private String trackingNumber;
