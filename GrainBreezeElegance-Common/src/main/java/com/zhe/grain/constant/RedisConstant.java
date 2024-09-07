@@ -10,7 +10,7 @@ public interface RedisConstant {
     String USER_TICKET_POSTFIX = "Bearer ";
 
     // 存放用户实体的key
-    String USER_ENTITY_KEY = "admin:user:";
+    String USER_ENTITY_KEY = "login:user:";
 
     // 验证码的key
     String CAPTCHA_KEY = "captcha:";
@@ -19,8 +19,14 @@ public interface RedisConstant {
     String TONG_YI_HISTORY = "chat:history:";
 
     // 管理员权限
-    String ADMIN_PERMISSION = "admin:permission";
+    String ADMIN_PERMISSION = "permission:admin";
+
+    // 用户权限
+    String USER_PERMISSION = "permission:user";
 
     // 商品分类属性分类
     String CATEGORY_LIST_TREE = "category:list:tree";
+
+    // 创建订单但是未支付
+    String NO_PAY_ORDER_KEY = "no:pay:order";
 }

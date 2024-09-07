@@ -73,7 +73,6 @@ public class LoginUserServiceImpl extends ServiceImpl<LoginUserMapper, LoginUser
         LoginUser loginUser = (LoginUser) SecurityUtil.returnPrincipal();
         Long userId = loginUser.getSysUser().getId();
         redisCache.deleteObject(RedisConstant.USER_ENTITY_KEY + userId);
-        redisCache.deleteObject(RedisConstant.ADMIN_PERMISSION);
         return Result.success(ResultMsgEnum.LOGOUT_SUCCESS, null);
     }
 

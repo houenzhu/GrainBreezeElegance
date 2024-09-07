@@ -43,11 +43,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         SysUser sysUser = userMapper.selectOne(
                 new QueryWrapper<SysUser>().eq("username", username)
         );
-        List<String> permissionList = redisCache.getCacheList(RedisConstant.ADMIN_PERMISSION);
-        if (CollectionUtils.isEmpty(permissionList)) {
-            permissionList = menuMapper.selectPermsByUserId(sysUser.getId());
-            redisCache.setCacheList(RedisConstant.ADMIN_PERMISSION, permissionList);
+        List<String> adminPermissioList = redisCache.getCacheList(RedisConstant.ADMIN_PERMISSION);
+        List<String> userPermissionList = redisCache.getCacheList(RedisConstant.USER_PERMISSION);
+        Long userId = sysUser.getId();
+        List<String> perms = menuMapper.selectPermsByUserId(userId);
+        String userType = sysUser.getUserType();
+        if ("0".equals(userType)) {
+            if (CollectionUtils.isEmpty(adminPermissioList)) {
+                redisCache.setCacheList(RedisConstant.ADMIN_PERMISSION, perms);
+                return new LoginUser(sysUser, perms);
+            }
+            return new LoginUser(sysUser, adminPermissioList);
+        } else {
+            if (CollectionUtils.isEmpty(userPermissionList)) {
+                redisCache.setCacheList(RedisConstant.USER_PERMISSION, perms);
+                return new LoginUser(sysUser, perms);
+            }
+            return new LoginUser(sysUser, userPermissionList);
         }
-        return new LoginUser(sysUser, permissionList);
+
     }
 }

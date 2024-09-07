@@ -18,6 +18,7 @@
         <result column="update_by" property="updateBy"/>
         <result column="update_time" property="updateTime"/>
         <result column="del_flag" property="delFlag"/>
+        <result column="balance" property="balance"/>
     </resultMap>
     <select id="findIdByNickname" resultType="java.lang.Long">
         select id from sys_user where nickname like Concat(#{nickName}, '%')

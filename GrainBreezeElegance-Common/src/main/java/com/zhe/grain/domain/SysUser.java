@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -111,4 +112,8 @@ public class SysUser implements Serializable {
      */
     private Integer delFlag;
 
+    /**
+     * 余额
+     */
+    private BigDecimal balance;
 }
