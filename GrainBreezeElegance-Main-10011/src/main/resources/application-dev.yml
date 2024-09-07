@@ -4,10 +4,10 @@ spring:
   application:
     name: grain-breeze-elegance-main-10011
   datasource:
-    driver-class-name: ${datasource.driver-class-name}
-    url: ${datasource.url}
-    username: ${datasource.username}
-    password: ${datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
   redis:
     port: 6379
     host: 192.168.56.100
@@ -51,6 +51,14 @@ spring:
         multiplier: 1
   cloud:
     nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
+        group: dev
+        ext-config[0]:
+          data-id: grain-service.yml
+          refresh: true
+          group: dev
       discovery:
         server-addr: localhost:8848
         namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
