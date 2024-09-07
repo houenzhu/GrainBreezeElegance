@@ -86,7 +86,7 @@ public class GrainServiceTest {
 
     @Test
     public void generator() {
-        CodeGeneration.GenerateCode("shipments");
+        CodeGeneration.GenerateCode("order_detail");
     }
 
     @Test
