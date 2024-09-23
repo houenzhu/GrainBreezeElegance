@@ -5,11 +5,12 @@ import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
 import com.zhe.grain.utils.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -22,7 +23,7 @@ import java.util.Map;
 @RestController
 public class OssServiceController {
 
-    @Resource
+    @Autowired
     private OSS ossClient;
 
     @Value("${spring.cloud.alicloud.access-key}")
@@ -55,7 +56,7 @@ public class OssServiceController {
             policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
 
             String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);
-            byte[] binaryData = postPolicy.getBytes("utf-8");
+            byte[] binaryData = postPolicy.getBytes(StandardCharsets.UTF_8);
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
             String postSignature = ossClient.calculatePostSignature(postPolicy);
 
@@ -71,8 +72,6 @@ public class OssServiceController {
         } catch (Exception e) {
             // Assert.fail(e.getMessage());
             System.out.println(e.getMessage());
-        } finally {
-            ossClient.shutdown();
         }
         return Result.success(respMap);
     }

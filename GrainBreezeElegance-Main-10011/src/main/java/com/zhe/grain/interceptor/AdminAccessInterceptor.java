@@ -7,6 +7,8 @@ import com.zhe.grain.utils.Result;
 import com.zhe.grain.utils.ResultMsgEnum;
 import com.zhe.grain.utils.ThreadLocalUtil;
 import com.zhe.grain.utils.WebUtil;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,8 +16,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @version 1.0

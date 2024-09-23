@@ -1,20 +1,23 @@
 package com.zhe.grain.controller.user;
 
-import com.ramostear.captcha.HappyCaptcha;
-import com.ramostear.captcha.common.Fonts;
-import com.ramostear.captcha.support.CaptchaStyle;
-import com.ramostear.captcha.support.CaptchaType;
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.GifCaptcha;
+import cn.hutool.captcha.LineCaptcha;
 import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.user.AdminLoginVO;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 
 /**
  * @version 1.0
@@ -48,15 +51,30 @@ public class LoginUserController {
      */
     @GetMapping("/captcha")
     public void HappyCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        HappyCaptcha.require(request, response)
-                .style(CaptchaStyle.ANIM)
-                .type(CaptchaType.NUMBER)
-                .length(6)
-                .width(220)
-                .height(80)
-                .font(Fonts.getInstance().zhFont())
-                .build().finish();
-        log.info("session的验证码 = {}", request.getSession().getAttribute("happy-captcha").toString());
+        GifCaptcha gifCaptcha = CaptchaUtil.createGifCaptcha(220, 80, 6);
+        String imageBase64 = gifCaptcha.getImageBase64();
+        String code = gifCaptcha.getCode();
+        request.getSession().setAttribute("captcha", code);
+        response.setContentType("image/png");
+        ServletOutputStream os = null;
+        try {
+            os = response.getOutputStream();
+            byte[] decodeBytes = Base64.decode(imageBase64);
+            os.write(decodeBytes);
+            os.flush();
+            os.close();
+        } catch (IOException e) {
+            log.info("验证码异常: {}", e.getMessage());
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                os.close();
+            } catch (IOException e) {
+                log.info("关闭输出流异常: {}", e.getMessage());
+                throw new RuntimeException(e);
+            }
+        }
+        log.info("session的验证码 = {}", request.getSession().getAttribute("captcha").toString());
     }
 
     @GetMapping("/info")

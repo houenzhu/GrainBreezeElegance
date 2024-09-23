@@ -1,5 +1,6 @@
 package com.zhe.grain.service.Impl.commodity;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.constant.RedisConstant;
@@ -7,6 +8,7 @@ import com.zhe.grain.domain.commodity.*;
 import com.zhe.grain.mapper.commodity.*;
 import com.zhe.grain.service.commodity.GrainCategoryService;
 import com.zhe.grain.utils.RedisCache;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, GrainCategoryEntity>
         implements GrainCategoryService {
 
@@ -42,34 +45,6 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
     private final CommoditySpuImagesMapper commoditySpuImagesMapper;
     private final CommoditySpuInfoDescMapper commoditySpuInfoDescMapper;
     private final CommoditySkuImagesMapper commoditySkuImagesMapper;
-
-    // 使用构造器注入
-    @Autowired
-    public GrainCategoryServiceImpl(GrainCategoryMapper grainCategoryMapper,
-                                    RedisCache redisCache,
-                                    GrainCategoryBrandRelationMapper grainCategoryBrandRelationMapper,
-                                    GrainCommodityAttrgroupCategoryRelationMapper attrgroupCategoryRelationMapper,
-                                    GrainCommodityAttrMapper grainCommodityAttrMapper,
-                                    GrainSaleAttrBrandRelationMapper grainSaleAttrBrandRelationMapper,
-                                    CommoditySpuInfoMapper commoditySpuInfoMapper,
-                                    CommoditySkuInfoMapper commoditySkuInfoMapper,
-                                    GrainCommodityAttrAttrgroupRelationMapper attrAttrgroupRelationMapper,
-                                    CommoditySpuImagesMapper commoditySpuImagesMapper,
-                                    CommoditySpuInfoDescMapper commoditySpuInfoDescMapper,
-                                    CommoditySkuImagesMapper commoditySkuImagesMapper) {
-        this.grainCategoryMapper = grainCategoryMapper;
-        this.redisCache = redisCache;
-        this.grainCategoryBrandRelationMapper = grainCategoryBrandRelationMapper;
-        this.attrgroupCategoryRelationMapper = attrgroupCategoryRelationMapper;
-        this.grainCommodityAttrMapper = grainCommodityAttrMapper;
-        this.grainSaleAttrBrandRelationMapper = grainSaleAttrBrandRelationMapper;
-        this.commoditySpuInfoMapper = commoditySpuInfoMapper;
-        this.commoditySkuInfoMapper = commoditySkuInfoMapper;
-        this.attrAttrgroupRelationMapper = attrAttrgroupRelationMapper;
-        this.commoditySpuImagesMapper = commoditySpuImagesMapper;
-        this.commoditySpuInfoDescMapper = commoditySpuInfoDescMapper;
-        this.commoditySkuImagesMapper = commoditySkuImagesMapper;
-    }
 
     /**
      * 获取树形商品分类列表
@@ -180,15 +155,19 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
                     .filter(grainCommodityAttr -> grainCommodityAttr.getAttrType() == 1)
                     .map(GrainCommodityAttr::getAttrId)
                     .toList();
-            grainSaleAttrBrandRelationMapper.delete(
-                    new LambdaQueryWrapper<GrainSaleAttrBrandRelation>()
-                            .in(GrainSaleAttrBrandRelation::getSaleAttrId, saleIds)
-            );
-            // 删除基本属性与属性组之间的关联
-            attrAttrgroupRelationMapper.delete(
-                    new LambdaQueryWrapper<GrainCommodityAttrAttrgroupRelation>()
-                            .in(GrainCommodityAttrAttrgroupRelation::getAttrId, attrIds)
-            );
+            if (CollectionUtil.isNotEmpty(saleIds)) {
+                grainSaleAttrBrandRelationMapper.delete(
+                        new LambdaQueryWrapper<GrainSaleAttrBrandRelation>()
+                                .in(GrainSaleAttrBrandRelation::getSaleAttrId, saleIds)
+                );
+            }
+            if (CollectionUtil.isNotEmpty(attrIds)) {
+                // 删除基本属性与属性组之间的关联
+                attrAttrgroupRelationMapper.delete(
+                        new LambdaQueryWrapper<GrainCommodityAttrAttrgroupRelation>()
+                                .in(GrainCommodityAttrAttrgroupRelation::getAttrId, attrIds)
+                );
+            }
             removeSpuAndSkuRelation(ids);
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -221,17 +200,21 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
                 new LambdaQueryWrapper<CommoditySkuInfo>()
                         .in(CommoditySkuInfo::getCatalogId, categoryIds)
         );
-        commoditySpuInfoDescMapper.delete(
-                new LambdaQueryWrapper<CommoditySpuInfoDesc>()
-                        .in(CommoditySpuInfoDesc::getSpuId, spuIds)
-        );
-        commoditySpuImagesMapper.delete(
-                new LambdaQueryWrapper<CommoditySpuImages>()
-                        .in(CommoditySpuImages::getSpuId, spuIds)
-        );
-        commoditySkuImagesMapper.delete(
-                new LambdaQueryWrapper<CommoditySkuImages>()
-                        .in(CommoditySkuImages::getSkuId, skuIds)
-        );
+        if (CollectionUtil.isNotEmpty(spuIds)) {
+            commoditySpuInfoDescMapper.delete(
+                    new LambdaQueryWrapper<CommoditySpuInfoDesc>()
+                            .in(CommoditySpuInfoDesc::getSpuId, spuIds)
+            );
+            commoditySpuImagesMapper.delete(
+                    new LambdaQueryWrapper<CommoditySpuImages>()
+                            .in(CommoditySpuImages::getSpuId, spuIds)
+            );
+        }
+        if (CollectionUtil.isNotEmpty(skuIds)) {
+            commoditySkuImagesMapper.delete(
+                    new LambdaQueryWrapper<CommoditySkuImages>()
+                            .in(CommoditySkuImages::getSkuId, skuIds)
+            );
+        }
     }
 }

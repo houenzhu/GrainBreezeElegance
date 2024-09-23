@@ -8,6 +8,7 @@ import com.zhe.grain.mapper.user.LoginUserMapper;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.*;
 import com.zhe.grain.vo.user.AdminLoginVO;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -40,7 +40,7 @@ public class LoginUserServiceImpl extends ServiceImpl<LoginUserMapper, LoginUser
 
     @Override
     public Result<Object> login(AdminLoginVO adminLoginVO, HttpServletRequest request) {
-        Object captchaObject = request.getSession().getAttribute("happy-captcha");
+        Object captchaObject = request.getSession().getAttribute("captcha");
         // 防止使用postman之类的工具绕过验证码
         if (Objects.isNull(captchaObject)) {
             return Result.error(ResultMsgEnum.LOGIN_ERROR, "服务器有误!", null);
@@ -100,7 +100,7 @@ public class LoginUserServiceImpl extends ServiceImpl<LoginUserMapper, LoginUser
         if (StringUtils.isBlank(userCaptcha)){
             return false;
         }
-        return userCaptcha.equals(captcha);
+        return userCaptcha.equalsIgnoreCase(captcha);
     }
 
     private Map<String, String> createAndReturnJwt(Authentication authenticate) {

@@ -1,21 +1,18 @@
 package com.zhe.grain.controller.user;
 
-import com.ramostear.captcha.HappyCaptcha;
-import com.ramostear.captcha.common.Fonts;
-import com.ramostear.captcha.support.CaptchaStyle;
-import com.ramostear.captcha.support.CaptchaType;
 import com.zhe.grain.annotation.AdminLoginAnnotation;
 import com.zhe.grain.domain.user.AdminEntity;
 import com.zhe.grain.service.user.AdminService;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 /**
  * @version 1.0
@@ -44,25 +41,6 @@ public class AdminController {
 //    public Result<Object> adminLogin(@RequestBody AdminLoginVO adminLoginVO) {
 //        return loginUserService.login(adminLoginVO);
 //    }
-
-    /**
-     * 生成验证码
-     * @param request
-     * @param response
-     */
-    @GetMapping("/captcha")
-    public void HappyCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("生成验证码...");
-        HappyCaptcha.require(request, response)
-                .style(CaptchaStyle.ANIM)
-                .type(CaptchaType.NUMBER)
-                .length(6)
-                .width(220)
-                .height(80)
-                .font(Fonts.getInstance().zhFont())
-                .build().finish();
-        log.info("session的验证码 = {}", request.getSession().getAttribute("happy-captcha").toString());
-    }
 
     /**
      * 退出登录

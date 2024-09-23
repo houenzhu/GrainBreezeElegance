@@ -5,8 +5,8 @@ import com.zhe.grain.domain.LoginUser;
 import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.user.AdminLoginVO;
+import jakarta.servlet.http.HttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @version 1.0
