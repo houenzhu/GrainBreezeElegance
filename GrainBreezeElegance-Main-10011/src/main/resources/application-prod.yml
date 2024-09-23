@@ -8,16 +8,17 @@ spring:
     url: ${datasource.url}
     username: ${datasource.username}
     password: ${datasource.password}
-  redis:
-    port: 6379
-    host: 192.168.56.100
-    connect-timeout: 10000ms
-    lettuce:
-      pool:
-        max-wait: 10000ms
-        max-idle: 200
-        min-idle: 5
-        max-active: 8
+  data:
+    redis:
+      port: 6379
+      host: 192.168.56.100
+      connect-timeout: 10000ms
+      lettuce:
+        pool:
+          max-wait: 10000ms
+          max-idle: 200
+          min-idle: 5
+          max-active: 8
   rabbitmq:
     host: 192.168.56.100
     port: 5672

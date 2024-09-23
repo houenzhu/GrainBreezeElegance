@@ -8,16 +8,20 @@ spring:
     url: jdbc:mysql://192.168.56.100:3306/grain_breeze_elegance?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
-  redis:
-    port: 6379
-    host: 192.168.56.100
-    connect-timeout: 10000ms
-    lettuce:
-      pool:
-        max-wait: 10000ms
-        max-idle: 200
-        min-idle: 5
-        max-active: 8
+  data:
+    redis:
+      port: 6379
+      host: 192.168.56.100
+      connect-timeout: 10000ms
+      lettuce:
+        pool:
+          max-wait: 10000ms
+          max-idle: 200
+          min-idle: 5
+          max-active: 8
+  devtools:
+    livereload:
+      enabled: true
   rabbitmq:
     host: 192.168.56.100
     port: 5672
@@ -68,10 +72,12 @@ spring:
         port: 8719
   config:
     activate:
-      on-profile: dev
+      on-profile: dev # 热部署
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  elasticsearch: # 配置ES地址
+    uris: http://localhost:9200
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:

@@ -1,5 +1,7 @@
 spring:
   cloud:
+    compatibility-verifier:
+      enabled: false
     util:
       enabled: false
     nacos:
