@@ -22,7 +22,6 @@ public class SelfExpressionRoot {
         LoginUser loginUser = (LoginUser) SecurityUtil.returnPrincipal();
         List<String> permissions = loginUser.getPermissions();
         log.info("注解上的权限: {}", role);
-
         // 如果没有通配符, 则需要在容器中寻找有无具体的权限
         for (String permission : permissions) {
             String rex = "^" + permission.replace("*", ".*") + "$";
@@ -33,5 +32,24 @@ public class SelfExpressionRoot {
             }
         }
         return permissions.contains(role);
+    }
+
+    public boolean hasAnyAuthority(String... roles) {
+        LoginUser loginUser = (LoginUser) SecurityUtil.returnPrincipal();
+        List<String> permissions = loginUser.getPermissions();
+        for (String permission : permissions) {
+            String rex = "^" + permission.replace("*", ".*") + "$";
+            Pattern pattern = Pattern.compile(rex);
+            for (String role : roles) {
+                Matcher matcher = pattern.matcher(role);
+                if (matcher.find()) {
+                    return true;
+                }
+                if (permissions.contains(role)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
