@@ -56,7 +56,9 @@ public class OrderDetailServiceImpl
                                 .setOrderId(orders.getOrderId())
                                 .setQuantity(skuInfo.getQuantity())
                                 .setSkuId(skuInfo.getSkuId())
-                                .setUnitPrice(skuInfo.getPrice());
+                                .setUnitPrice(skuInfo.getPrice())
+                                .setIsDeleted((byte) 0)
+                                .setUpdateBy(userId.intValue());
                         return orderDetail;
                     }).toList();
             super.saveBatch(orderDetails);

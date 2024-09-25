@@ -31,4 +31,11 @@ public interface OrdersService extends IService<Orders> {
      * 2024/09/07
      */
     Orders saveOrders(List<SkusInfoVO> skusInfoVOList);
+
+    /**
+     * zhu
+     * 取消订单(修改状态)
+     * 2024/09/24
+     */
+    void deleteOrders(List<String> orderIds);
 }

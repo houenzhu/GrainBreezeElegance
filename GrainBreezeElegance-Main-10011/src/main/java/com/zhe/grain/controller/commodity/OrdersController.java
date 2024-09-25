@@ -45,4 +45,12 @@ public class OrdersController {
         return Result.success("订单创建成功，请在10分钟内完成支付!", orders);
     }
 
+    @PreAuthorize("@zhe.hasAnyAuthority('user:order:cancel', 'sys:order:cancel')")
+    @PostMapping("/cancelOrders")
+    public Result<Boolean> cancelOrders(@RequestBody List<String> orderIds) {
+        // TODO: 2024/9/24 订单取消
+        ordersService.deleteOrders(orderIds);
+        return Result.success("取消成功!", true);
+    }
+
 }

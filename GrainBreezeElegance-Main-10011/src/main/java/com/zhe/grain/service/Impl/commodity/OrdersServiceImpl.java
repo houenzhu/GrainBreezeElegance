@@ -7,6 +7,7 @@ import com.zhe.grain.constant.RedisConstant;
 import com.zhe.grain.domain.commodity.Orders;
 import com.zhe.grain.mapper.commodity.OrdersMapper;
 import com.zhe.grain.mapper.user.UserMapper;
+import com.zhe.grain.service.commodity.OrderDetailService;
 import com.zhe.grain.service.commodity.OrdersService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Query;
@@ -15,15 +16,18 @@ import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.vo.commodity.OrderVO;
 import com.zhe.grain.vo.commodity.SkusInfoVO;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 /**
  * <p>
@@ -35,12 +39,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @AllArgsConstructor
+@Slf4j
 public class OrdersServiceImpl
         extends ServiceImpl<OrdersMapper, Orders>
         implements OrdersService {
-
     private final UserMapper userMapper;
     private final RedisCache redisCache;
+    private final OrderDetailService orderDetailService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -78,11 +83,11 @@ public class OrdersServiceImpl
 
     /**
      * 生成订单, 未支付状态
-     *
      * @param skuInfos
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Orders saveOrders(List<SkusInfoVO> skuInfos) {
         Long userId = SecurityUtil.returnUserId();
         BigDecimal amount = new BigDecimal(0);
@@ -100,10 +105,34 @@ public class OrdersServiceImpl
                 .setTrackingNumber("")
                 .setTrackingNumber("")
                 .setShippingAddress("");
-        baseMapper.insert(orders);
-        // 未支付的设置10分钟有效期。过时则消除订单
-        redisCache.setCacheObject(RedisConstant.NO_PAY_ORDER_KEY + ":" +
-                orders.getOrderId(), orders, 10, TimeUnit.MINUTES);
+        try {
+            baseMapper.insert(orders);
+            // 未支付的设置10分钟有效期。过时则消除订单
+            redisCache.setCacheObject(RedisConstant.NO_PAY_ORDER_KEY + ":" +
+                    orders.getOrderId(), orders, 10, TimeUnit.MINUTES);
+            // 插入订单明细
+            orderDetailService.insertOrderDetail(skuInfos, orders);
+        } catch (Exception e) {
+            log.error("下订单异常: {}", e.getMessage());
+            throw new RuntimeException(e);
+        }
         return orders;
+    }
+
+    /**
+     * 取消订单
+     * zhu
+     * 2024/09/24
+     */
+    @Override
+    public void deleteOrders(List<String> orderIds) {
+        List<Orders> ordersList = orderIds.stream()
+                .map(orderId -> {
+                    Orders orders = new Orders();
+                    orders.setOrderId(orderId)
+                            .setOrderStatus((byte) 5); // 取消状态
+                    return orders;
+                }).toList();
+        super.updateBatchById(ordersList);
     }
 }
