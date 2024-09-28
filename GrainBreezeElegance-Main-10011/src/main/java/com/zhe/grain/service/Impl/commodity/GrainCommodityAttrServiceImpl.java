@@ -136,8 +136,7 @@ public class GrainCommodityAttrServiceImpl extends ServiceImpl<GrainCommodityAtt
         Collections.reverse(ids);
         GrainCommodityAttrVO grainCommodityAttrVO;
         try {
-            grainCommodityAttrVO = (GrainCommodityAttrVO)
-                    ReflectUtils.reflectObject(GrainCommodityAttrVO.class, values);
+            grainCommodityAttrVO = ReflectUtils.reflectObject(GrainCommodityAttrVO.class, values);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -437,7 +436,7 @@ public class GrainCommodityAttrServiceImpl extends ServiceImpl<GrainCommodityAtt
             values.put("categoryName", name);
             GrainCommodityAttrVO grainCommodityAttrVO;
             try {
-                grainCommodityAttrVO = (GrainCommodityAttrVO) ReflectUtils
+                grainCommodityAttrVO = ReflectUtils
                         .reflectObject(GrainCommodityAttrVO.class, values);
             } catch (Exception e) {
                 throw new RuntimeException(e);
