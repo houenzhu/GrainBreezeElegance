@@ -1,6 +1,8 @@
 package com.zhe.grain.utils;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +14,7 @@ import java.util.Map;
 public class ReflectUtils {
 
     @SuppressWarnings("all")
-    public static Object reflectObject(Class clazz, Map<String, Object> values) throws Exception {
+    public static <T> T reflectObject(Class clazz, Map<String, Object> values) throws Exception {
         Object object = clazz.getConstructor(null).newInstance();
         Class superclass = clazz.getSuperclass();
         Field[] parentFields = superclass.getDeclaredFields();
@@ -44,6 +46,11 @@ public class ReflectUtils {
                 }
             });
         }
-        return object;
+        return (T) object;
+    }
+
+    public static Map<String, Object> constructMapParams(Object object) {
+        // todo 封装传进一个对象，自动解析铖key, value的方法
+        return null;
     }
 }
