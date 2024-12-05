@@ -43,7 +43,7 @@ public class LoginUserServiceImpl extends ServiceImpl<LoginUserMapper, LoginUser
         Object captchaObject = request.getSession().getAttribute("captcha");
         // 防止使用postman之类的工具绕过验证码
         if (Objects.isNull(captchaObject)) {
-            return Result.error(ResultMsgEnum.LOGIN_ERROR, "服务器有误!", null);
+            return Result.error(ResultMsgEnum.LOGIN_ERROR, "验证码为空!", null);
         }
         String captcha = (String) captchaObject;
         String userCaptcha = adminLoginVO.getCaptcha();
