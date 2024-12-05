@@ -7,6 +7,7 @@ import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.mapper.user.MenuMapper;
 import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.utils.RedisCache;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,16 +24,17 @@ import java.util.List;
  */
 
 @Service
+@AllArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
-    private UserMapper userMapper;
 
-    @Autowired
-    private MenuMapper menuMapper;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private RedisCache redisCache;
+
+    private final MenuMapper menuMapper;
+
+
+    private final RedisCache redisCache;
 
 
     @Override

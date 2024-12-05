@@ -14,6 +14,7 @@ import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Query;
 import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.vo.user.RegisterUserVO;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@AllArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
         implements UserService {
 
@@ -41,12 +43,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
     private static final String DEFAULT_USER_AVATAR =
             "https://zheliving-10000.oss-cn-guangzhou.aliyuncs.com/%E5%8F%AF%E7%88%B1%E8%B6%85%E4%BA%BA%E8%B4%B4%E7%BA%B8.png";
 
-    @Autowired
-    public UserServiceImpl(PasswordEncoder passwordEncoder,
-                           SysUserRoleMapper sysUserRoleMapper) {
-        this.passwordEncoder = passwordEncoder;
-        this.sysUserRoleMapper = sysUserRoleMapper;
-    }
 
     /**
      * 用户信息分页查询
