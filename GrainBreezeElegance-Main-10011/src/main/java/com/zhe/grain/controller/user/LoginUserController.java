@@ -51,7 +51,7 @@ public class LoginUserController {
      */
     @GetMapping("/captcha")
     public void HappyCaptcha(HttpServletRequest request, HttpServletResponse response) {
-        GifCaptcha gifCaptcha = CaptchaUtil.createGifCaptcha(220, 80, 6);
+        GifCaptcha gifCaptcha = CaptchaUtil.createGifCaptcha(220, 80, 4);
         String imageBase64 = gifCaptcha.getImageBase64();
         String code = gifCaptcha.getCode();
         request.getSession().setAttribute("captcha", code);
