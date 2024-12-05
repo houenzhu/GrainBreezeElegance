@@ -4,12 +4,14 @@ import com.zhe.grain.constant.RedisConstant;
 import com.zhe.grain.domain.Menu;
 import com.zhe.grain.mapper.user.MenuMapper;
 import com.zhe.grain.utils.RedisCache;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -19,42 +21,49 @@ import java.util.List;
  */
 
 @Component
+@AllArgsConstructor
 @Slf4j
 public class MenuJob {
 
     private final RedisCache redisCache;
     private final MenuMapper menuMapper;
 
-    @Autowired
-    public MenuJob(RedisCache redisCache,
-                   MenuMapper menuMapper) {
-        this.redisCache = redisCache;
-        this.menuMapper = menuMapper;
-    }
 
     // 定时检查管理员菜单权限是否更改？
     @Scheduled(cron = "0 */30 * * * ?")
-    public void job1() {
-        log.info("权限对比开始进行...");
-        long startTime = System.currentTimeMillis();
-        List<String> cacheList = redisCache.getCacheList(RedisConstant.ADMIN_PERMISSION);
+    public void updateMenuScheduler() {
+        // 管理员权限
+        List<String> adminPermission = redisCache.getCacheList(RedisConstant.ADMIN_PERMISSION);
+        // 用户权限
+        List<String> userPermission = redisCache.getCacheList(RedisConstant.USER_PERMISSION);
         // 固定的超级管理员id
-        List<Menu> menus = menuMapper.selectPermsByUserIdOrderByDesc(1L);
-        List<String> menuItems = menus.stream()
+        List<Menu> adminMenu = menuMapper.selectPermsByUserIdOrderByDesc(1L);
+        List<Menu> userMenu = menuMapper.selectPermsByUserIdOrderByDesc(4L);
+        List<String> sysMenuItems = adminMenu.stream()
                 .map(Menu::getPerms).toList();
-        for (String menuItem : menuItems) {
-            if (!cacheList.contains(menuItem)) {
-                log.info("检测到有新的权限加入, 正在进行重新加载......");
-                redisCache.deleteObject(RedisConstant.ADMIN_PERMISSION);
-                Collection<String> keys = redisCache.keys("admin:user:*", 100);
-                // 强制退出所有的管理员, 进行重新登录
-                redisCache.deleteObject(keys);
-                long endTime = System.currentTimeMillis();
-                log.info("检测结束, 更改完成, 用时{}ms", endTime - startTime);
-                return;
+        List<String> userMenuItems = userMenu.stream()
+                .map(Menu::getPerms).toList();
+        try {
+            for (String menuItem : sysMenuItems) {
+                if (!adminPermission.contains(menuItem)) {
+                    redisCache.deleteObject(RedisConstant.ADMIN_PERMISSION);
+                    Collection<String> keys = redisCache.keys(RedisConstant.USER_ENTITY_KEY + "*", 100);
+                    // 强制退出所有的管理员, 进行重新登录
+                    redisCache.deleteObject(keys);
+                    return;
+                }
             }
+            for (String menuItem : userMenuItems) {
+                if (!userPermission.contains(menuItem)) {
+                    redisCache.deleteObject(RedisConstant.USER_PERMISSION);
+                    Collection<String> keys = redisCache.keys(RedisConstant.USER_ENTITY_KEY + "*", 100);
+                    // 强制退出所有的用户, 进行重新登录
+                    redisCache.deleteObject(keys);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        long endTime = System.currentTimeMillis();
-        log.info("检测结束, 无更改, 用时{}ms", endTime - startTime);
     }
 }
