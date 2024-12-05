@@ -41,4 +41,10 @@ public class SysMenuController {
         sysMenuService.addPermission(sysMenuFormVO);
         return Result.success();
     }
+
+    @GetMapping("/syncMenu")
+    @PreAuthorize("@zhe.hasAuthority('sys:menu:syncMenu')")
+    public Result syncMenu() {
+        return sysMenuService.updateMenu() ? Result.success("更新成功!请刷新页面重新登录!", null) : Result.error();
+    }
 }

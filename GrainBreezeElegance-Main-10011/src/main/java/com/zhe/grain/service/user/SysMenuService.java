@@ -29,4 +29,10 @@ public interface SysMenuService extends IService<SysMenu> {
      * @param sysMenuFormVO
      */
     void addPermission(SysMenuFormVO sysMenuFormVO);
+
+    /**
+     * 手动更新权限
+     * @return
+     */
+    boolean updateMenu();
 }

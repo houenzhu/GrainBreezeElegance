@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.dto.SysMenuDTO;
 import com.zhe.grain.domain.user.SysMenu;
+import com.zhe.grain.job.MenuJob;
 import com.zhe.grain.mapper.user.SysMenuMapper;
 import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.service.user.SysMenuService;
@@ -12,6 +13,8 @@ import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Query;
 import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.vo.user.SysMenuFormVO;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +31,15 @@ import java.util.Map;
  * @since 2024-07-25
  */
 @Service
+@AllArgsConstructor
+@Slf4j
 public class SysMenuServiceImpl
         extends ServiceImpl<SysMenuMapper, SysMenu>
         implements SysMenuService {
 
     private final UserMapper userMapper;
+    private final MenuJob menuJob;
 
-    @Autowired
-    public SysMenuServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
 
     /**
      * 分页查询权限菜单
@@ -87,5 +89,19 @@ public class SysMenuServiceImpl
                 .setVisible("0")
                 .setStatus("0");
         this.baseMapper.insert(sysMenu);
+    }
+
+    /**
+     * 手动更新权限
+     */
+    @Override
+    public boolean updateMenu() {
+        try {
+            menuJob.updateMenuScheduler();
+        } catch (Exception e) {
+            log.error("Exception: {}", e.getMessage());
+            return false;
+        }
+        return true;
     }
 }
