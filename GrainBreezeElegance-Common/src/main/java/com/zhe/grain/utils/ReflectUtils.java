@@ -2,6 +2,7 @@ package com.zhe.grain.utils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,8 +50,12 @@ public class ReflectUtils {
         return (T) object;
     }
 
-    public static Map<String, Object> constructMapParams(Object object) {
-        // todo 封装传进一个对象，自动解析铖key, value的方法
-        return null;
+    public static Map<String, Object> constructMapParams(Object object) throws IllegalAccessException {
+        Field[] fields = object.getClass().getDeclaredFields();
+        Map<String, Object> map = new HashMap<>();
+        for (Field field : fields) {
+            map.put(field.getName(), field.get(object));
+        }
+        return map;
     }
 }
