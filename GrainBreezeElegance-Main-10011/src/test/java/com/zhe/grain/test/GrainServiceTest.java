@@ -1,12 +1,11 @@
 package com.zhe.grain.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.zhe.grain.domain.commodity.GrainCommodityAttrAttrgroupRelation;
 import com.zhe.grain.domain.SysUser;
-import com.zhe.grain.mapper.commodity.GrainCategoryMapper;
-import com.zhe.grain.mapper.commodity.GrainCommodityAttrAttrgroupRelationMapper;
-import com.zhe.grain.mapper.commodity.GrainCommodityAttrMapper;
-import com.zhe.grain.mapper.commodity.GrainCommodityAttrgroupCategoryRelationMapper;
+import com.zhe.grain.domain.commodity.Orders;
+import com.zhe.grain.mapper.commodity.*;
 import com.zhe.grain.mapper.user.MenuMapper;
 import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.service.commodity.GrainCategoryBrainRelationService;
@@ -16,10 +15,12 @@ import com.zhe.grain.utils.CodeGeneration;
 import com.zhe.grain.utils.RedisCache;
 import com.zhe.grain.utils.ReflectUtils;
 import com.zhe.grain.vo.commodity.GrainCommodityAttrVO;
+import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -30,6 +31,7 @@ import java.util.*;
  */
 
 @SpringBootTest
+@ActiveProfiles("dev")
 public class GrainServiceTest {
 
     @Autowired
@@ -64,6 +66,10 @@ public class GrainServiceTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OrdersMapper ordersMapper;
+
 
     private static final String USER_AGENT = "Java-HttpURLConnection/1.0";
 
@@ -166,4 +172,11 @@ public class GrainServiceTest {
         Collection<String> keys = redisCache.keys("test:user:*", 100);
     }
 
+    @Test
+    public void m1() {
+        Orders orders = ordersMapper.selectOne(new LambdaQueryWrapper<Orders>().eq(Orders::getOrderId,
+                "1832421375495434241"));
+        SysUser sysUser = userMapper.selectById(orders.getCustomerId());
+        System.out.println("sysUser = " + sysUser);
+    }
 }
