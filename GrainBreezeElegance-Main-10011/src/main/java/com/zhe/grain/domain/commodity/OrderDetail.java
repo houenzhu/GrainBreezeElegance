@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 import lombok.experimental.Accessors;
 
 /**
@@ -18,8 +18,9 @@ import lombok.experimental.Accessors;
  * @author houen_zhu
  * @since 2024-09-05
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
 @TableName("order_detail")
 public class OrderDetail implements Serializable {

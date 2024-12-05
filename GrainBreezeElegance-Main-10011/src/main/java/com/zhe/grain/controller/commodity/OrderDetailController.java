@@ -1,7 +1,13 @@
 package com.zhe.grain.controller.commodity;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.zhe.grain.service.commodity.OrderDetailService;
+import com.zhe.grain.utils.Result;
+import com.zhe.grain.vo.commodity.OrderDetailVO;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -12,7 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-09-05
  */
 @RestController
-@RequestMapping("/orderDetail")
+@AllArgsConstructor
+@RequestMapping("/grain/orderDetail")
 public class OrderDetailController {
+    private final OrderDetailService orderDetailService;
+
+    /**
+     * 待测试
+     * @param orderId
+     * @return
+     */
+    @GetMapping("/findById")
+    @PreAuthorize("@zhe.hasAnyAuthority('sys:order:detail:id', 'user:order:detail:id')")
+    public Result<OrderDetailVO> findById(@RequestParam("orderId") String orderId) {
+        OrderDetailVO orderDetailVO =
+                orderDetailService.getOrderDetailByOrderId(orderId);
+        return Result.success("OK", orderDetailVO);
+    }
 
 }

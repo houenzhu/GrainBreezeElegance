@@ -31,9 +31,9 @@ public class OrderDetailVO implements Serializable {
     private Byte orderStatus;                 // 订单状态
     private Byte paymentStatus;               // 支付状态
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createdTime;          // 创建时间
+    private LocalDateTime createdTime;          // 创建时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updatedTime;          // 更新时间
+    private LocalDateTime updatedTime;          // 更新时间
     private List<ProductInfo> productList;   // 商品信息列表
     private BigDecimal totalAmount;           // 总金额
     private String shippingAddress;            // 收货地址

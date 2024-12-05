@@ -1,24 +1,28 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.zhe.grain.constant.RedisConstant;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.domain.commodity.CommoditySkuInfo;
 import com.zhe.grain.domain.commodity.OrderDetail;
 import com.zhe.grain.domain.commodity.Orders;
+import com.zhe.grain.mapper.commodity.CommoditySkuInfoMapper;
 import com.zhe.grain.mapper.commodity.OrderDetailMapper;
 import com.zhe.grain.mapper.commodity.OrdersMapper;
+import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.service.commodity.OrderDetailService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.utils.RedisCache;
 import com.zhe.grain.utils.SecurityUtil;
+import com.zhe.grain.vo.commodity.OrderDetailVO;
 import com.zhe.grain.vo.commodity.SkusInfoVO;
 import lombok.AllArgsConstructor;
-import org.apache.ibatis.transaction.Transaction;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -36,6 +40,8 @@ public class OrderDetailServiceImpl
 
     private final OrdersMapper ordersMapper;
     private final RedisCache redisCache;
+    private final CommoditySkuInfoMapper skuInfoMapper;
+    private final UserMapper userMapper;
 
 
     /**
@@ -65,5 +71,48 @@ public class OrderDetailServiceImpl
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 查看订单详情
+     * houen_zhu
+     * 2024-09-07
+     */
+    @Override
+    public OrderDetailVO getOrderDetailByOrderId(String orderId) {
+        List<OrderDetail> orderDetails = baseMapper.selectList(
+                new LambdaQueryWrapper<OrderDetail>()
+                        .eq(OrderDetail::getOrderId, orderId)
+        );
+        Orders orders = ordersMapper.selectOne(
+                new LambdaQueryWrapper<Orders>()
+                        .eq(Orders::getOrderId, orderId)
+        );
+        SysUser sysUser = userMapper.selectById(orders.getCustomerId());
+        OrderDetailVO orderDetailVO = new OrderDetailVO();
+        BeanUtils.copyProperties(orders, orderDetailVO);
+        orderDetailVO.setCreatedTime(orders.getCreatedAt())
+                        .setUpdatedTime(orders.getUpdatedAt());
+        orderDetailVO.setCustomerName(sysUser.getNickname());
+        List<Long> ids = orderDetails.stream()
+                .map(OrderDetail::getSkuId).toList();
+        List<CommoditySkuInfo> commoditySkuInfos = skuInfoMapper.selectBatchIds(ids);
+        List<OrderDetailVO.ProductInfo> productInfos = new ArrayList<>();
+        for (OrderDetail orderDetail : orderDetails) {
+            for (CommoditySkuInfo commoditySkuInfo : commoditySkuInfos) {
+                if (commoditySkuInfo.getSkuId().equals(orderDetail.getSkuId())) {
+                    OrderDetailVO.ProductInfo productInfo = new OrderDetailVO.ProductInfo();
+                    productInfo.setProductId(commoditySkuInfo.getSkuId().toString())
+                            .setProductName(commoditySkuInfo.getSkuName())
+                            .setQuantity(orderDetail.getQuantity())
+                            .setUnitPrice(commoditySkuInfo.getPrice())
+                            .setTotalPrice(commoditySkuInfo.getPrice()
+                                    .multiply(new BigDecimal(orderDetail.getQuantity())));
+                    productInfos.add(productInfo);
+                }
+            }
+        }
+        orderDetailVO.setProductList(productInfos);
+        return orderDetailVO;
     }
 }
