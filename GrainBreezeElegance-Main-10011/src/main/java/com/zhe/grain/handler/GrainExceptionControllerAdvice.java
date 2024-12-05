@@ -3,6 +3,8 @@ package com.zhe.grain.handler;
 import com.zhe.grain.exception.PermissionException;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
+import com.zhe.grain.utils.ResultMsgEnum;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -20,14 +22,11 @@ import java.util.Map;
  */
 @RestControllerAdvice("com.zhe.grain.controller")
 @Slf4j
+@AllArgsConstructor
 public class GrainExceptionControllerAdvice {
 
     private final LoginUserService loginUserService;
 
-    @Autowired
-    public GrainExceptionControllerAdvice(LoginUserService loginUserService) {
-        this.loginUserService = loginUserService;
-    }
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public Result<Object> handleValidException(MethodArgumentNotValidException e) {
@@ -44,7 +43,7 @@ public class GrainExceptionControllerAdvice {
     @ExceptionHandler({Throwable.class})
     public Result<Object> handleException(Throwable throwable) {
         log.error(throwable.getMessage());
-        return Result.error();
+        return Result.error(ResultMsgEnum.ERROR, throwable.getMessage(), null);
     }
 
     /**
