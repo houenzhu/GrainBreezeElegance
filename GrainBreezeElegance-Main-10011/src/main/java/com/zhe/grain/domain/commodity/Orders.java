@@ -1,7 +1,10 @@
 package com.zhe.grain.domain.commodity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,19 +27,23 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Orders implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "order_id", type = IdType.ASSIGN_ID)
+    @ExcelProperty("订单ID")
     private String orderId;
 
     /**
      * 顾客ID
      */
+    @ExcelProperty("顾客ID")
     private Integer customerId;
 
     /**
      * 订单总金额
      */
+    @ExcelProperty("订单总金额")
     private BigDecimal totalAmount;
 
     /**
@@ -49,43 +56,51 @@ public class Orders implements Serializable {
      *  5-已取消(订单已被取消，不再处理),
      *  6-已退货(客户已退货，订单进入退货处理流程)
      */
+    @ExcelProperty("订单状态")
     private Byte orderStatus;
 
     /**
      * 支付状态
      * 如：0-待支付, 1-已支付, 3-支付失败, 4-已退款
      */
+    @ExcelProperty("支付状态")
     private Byte paymentStatus;
 
     /**
      * 收货地址
      */
+    @ExcelProperty("收货地址")
     private String shippingAddress;
 
     /**
      * 账单地址
      */
+    @ExcelProperty("账单地址")
     private String billingAddress;
 
     /**
      * 快递单号
      */
+    @ExcelProperty("快递单号")
     private String trackingNumber;
 
     /**
      * 快递方式
      */
+    @ExcelProperty("快递方式")
     private Byte shippingMethod;
 
     /**
      * 创建时间
      */
+    @ExcelProperty("创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createdAt;
 
     /**
      * 更新时间
      */
+    @ExcelProperty("更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updatedAt;
 }
