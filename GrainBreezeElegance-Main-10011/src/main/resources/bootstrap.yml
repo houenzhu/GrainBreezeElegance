@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: grain-breeze-elegance-main-10011
+  datasource:
+    driver-class-name: ${mysql.datasource.driver-class-name}
+    url: ${mysql.datasource.url}
+    username: ${mysql.datasource.username}
+    password: ${mysql.datasource.password}
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
+        group: dev
+        ext-config[0]:
+          data-id: grain-service.yml
+          refresh: true
+          group: dev
+      discovery:
+        server-addr: localhost:8848
+        namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
+      username: nacos
+      password: nacos
