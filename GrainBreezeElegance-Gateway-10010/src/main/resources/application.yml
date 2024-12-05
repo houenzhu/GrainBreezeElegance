@@ -19,6 +19,8 @@ spring:
       discovery:
         server-addr: localhost:8848
         namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
+        username: nacos
+        password: nacos
     gateway:
       routes:
         - id: grain-breeze-service-route
