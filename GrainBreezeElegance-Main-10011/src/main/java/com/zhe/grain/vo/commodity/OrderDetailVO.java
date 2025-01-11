@@ -51,6 +51,7 @@ public class OrderDetailVO implements Serializable {
         private Integer quantity;                // 商品数量
         private BigDecimal unitPrice;           // 商品单价
         private BigDecimal totalPrice;          // 商品总价
+        private String url;
     }
 
 }

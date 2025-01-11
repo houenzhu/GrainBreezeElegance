@@ -4,9 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.commodity.CommoditySkuImages;
 import com.zhe.grain.domain.commodity.CommoditySkuInfo;
 import com.zhe.grain.domain.commodity.OrderDetail;
 import com.zhe.grain.domain.commodity.Orders;
+import com.zhe.grain.mapper.commodity.CommoditySkuImagesMapper;
 import com.zhe.grain.mapper.commodity.CommoditySkuInfoMapper;
 import com.zhe.grain.mapper.commodity.OrderDetailMapper;
 import com.zhe.grain.mapper.commodity.OrdersMapper;
@@ -17,8 +19,10 @@ import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.vo.commodity.OrderDetailVO;
 import com.zhe.grain.vo.commodity.SkusInfoVO;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -42,6 +46,7 @@ public class OrderDetailServiceImpl
     private final RedisCache redisCache;
     private final CommoditySkuInfoMapper skuInfoMapper;
     private final UserMapper userMapper;
+    private final CommoditySkuImagesMapper skuImagesMapper;
 
 
     /**
@@ -80,10 +85,17 @@ public class OrderDetailServiceImpl
      */
     @Override
     public OrderDetailVO getOrderDetailByOrderId(String orderId) {
+        if (StringUtils.isBlank(orderId)) {
+            return null;
+        }
         List<OrderDetail> orderDetails = baseMapper.selectList(
                 new LambdaQueryWrapper<OrderDetail>()
                         .eq(OrderDetail::getOrderId, orderId)
         );
+        // 防止出现有订单没有明细的BUG, 直接返回null
+        if (CollectionUtils.isEmpty(orderDetails)) {
+            return null;
+        }
         Orders orders = ordersMapper.selectOne(
                 new LambdaQueryWrapper<Orders>()
                         .eq(Orders::getOrderId, orderId)
@@ -98,19 +110,29 @@ public class OrderDetailServiceImpl
                 .map(OrderDetail::getSkuId).toList();
         List<CommoditySkuInfo> commoditySkuInfos = skuInfoMapper.selectBatchIds(ids);
         List<OrderDetailVO.ProductInfo> productInfos = new ArrayList<>();
-        for (OrderDetail orderDetail : orderDetails) {
-            for (CommoditySkuInfo commoditySkuInfo : commoditySkuInfos) {
-                if (commoditySkuInfo.getSkuId().equals(orderDetail.getSkuId())) {
-                    OrderDetailVO.ProductInfo productInfo = new OrderDetailVO.ProductInfo();
-                    productInfo.setProductId(commoditySkuInfo.getSkuId().toString())
-                            .setProductName(commoditySkuInfo.getSkuName())
-                            .setQuantity(orderDetail.getQuantity())
-                            .setUnitPrice(commoditySkuInfo.getPrice())
-                            .setTotalPrice(commoditySkuInfo.getPrice()
-                                    .multiply(new BigDecimal(orderDetail.getQuantity())));
-                    productInfos.add(productInfo);
+        try {
+            for (OrderDetail orderDetail : orderDetails) {
+                for (CommoditySkuInfo commoditySkuInfo : commoditySkuInfos) {
+                    if (commoditySkuInfo.getSkuId().equals(orderDetail.getSkuId())) {
+                        OrderDetailVO.ProductInfo productInfo = new OrderDetailVO.ProductInfo();
+                        productInfo.setProductId(commoditySkuInfo.getSkuId().toString())
+                                .setProductName(commoditySkuInfo.getSkuName())
+                                .setQuantity(orderDetail.getQuantity())
+                                .setUnitPrice(commoditySkuInfo.getPrice())
+                                .setTotalPrice(commoditySkuInfo.getPrice()
+                                        .multiply(new BigDecimal(orderDetail.getQuantity())));
+                        CommoditySkuImages commoditySkuImages = skuImagesMapper.selectOne(
+                                new LambdaQueryWrapper<CommoditySkuImages>().eq(CommoditySkuImages::getSkuId, commoditySkuInfo.getSkuId())
+                                        .and(wrapper -> wrapper.eq(CommoditySkuImages::getDefaultImg, 1))
+                        );
+                        // 加入图片
+                        productInfo.setUrl(commoditySkuImages.getImgUrl());
+                        productInfos.add(productInfo);
+                    }
                 }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         orderDetailVO.setProductList(productInfos);
         return orderDetailVO;

@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-07-12
  */
 @RestController
-@RequestMapping("/grainSaleAttrBrandRelation")
+@RequestMapping(ControllerConstant.API_PREFIX + "grainSaleAttrBrandRelation")
 public class GrainSaleAttrBrandRelationController {
 
 }

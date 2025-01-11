@@ -59,12 +59,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 new UsernamePasswordAuthenticationToken(loginUser,
                         null, loginUser.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-        // 当有操作的时候进行时间重置
-        String jwt = JwtUtil.refreshToken(token);
-        redisCache.setCacheObject(RedisConstant.USER_ENTITY_KEY + loginUser.getSysUser().getId(), loginUser,
-                60 * 60 * 1000, TimeUnit.MILLISECONDS);
-        response.setHeader("Authorization", jwt);
-        logger.info("重置jwt成功, {}", jwt);
+//        // 当有操作的时候进行时间重置
+//        String jwt = JwtUtil.refreshToken(token);
+//        redisCache.setCacheObject(RedisConstant.USER_ENTITY_KEY + loginUser.getSysUser().getId(), loginUser,
+//                60 * 60 * 1000, TimeUnit.MILLISECONDS);
+//        response.setHeader("Authorization", jwt);
+//        logger.info("重置jwt成功, {}", jwt);
         filterChain.doFilter(request, response);
     }
 

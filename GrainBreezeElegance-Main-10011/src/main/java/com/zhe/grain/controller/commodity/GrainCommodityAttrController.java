@@ -1,5 +1,7 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.annotation.CheckArgs;
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.domain.commodity.GrainCommodityAttr;
 import com.zhe.grain.service.commodity.GrainCommodityAttrService;
 import com.zhe.grain.utils.PageUtils;
@@ -24,7 +26,7 @@ import java.util.Objects;
  * @since 2024-06-08
  */
 @RestController
-@RequestMapping("/grain/grainCommodityAttr")
+@RequestMapping(ControllerConstant.API_PREFIX + "grainCommodityAttr")
 public class GrainCommodityAttrController {
 
     @Autowired
@@ -104,8 +106,8 @@ public class GrainCommodityAttrController {
      */
     @GetMapping("/sale/list/{categoryId}/{brandId}")
     @PreAuthorize("@zhe.hasAuthority('sys:grain_commodity_attr:list')")
-    public Result<List<GrainCommodityAttr>> selectSaleAttrByCategoryId(@PathVariable Long categoryId,
-                                                                       @PathVariable Long brandId) {
+    public Result<List<GrainCommodityAttr>> selectSaleAttrByCategoryId(@PathVariable("categoryId") Long categoryId,
+                                                                       @PathVariable("brandId") Long brandId) {
         List<GrainCommodityAttr> grainCommodityAttrs =
                 grainCommodityAttrService.selectSaleAttrByCategoryId(categoryId, brandId);
         return Result.success(grainCommodityAttrs);

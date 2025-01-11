@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.constant.RedisConstant;
 import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.service.commodity.GrainCategoryService;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/grain/category")
+@RequestMapping(ControllerConstant.API_PREFIX + "category")
 public class GrainCategoryController {
 
     @Autowired

@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.service.commodity.ShipmentsService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Result;
@@ -23,7 +24,7 @@ import java.util.Map;
  * @since 2024-08-12
  */
 @RestController
-@RequestMapping("/grain/shipments")
+@RequestMapping(ControllerConstant.API_PREFIX + "shipments")
 @AllArgsConstructor
 @Slf4j
 public class ShipmentsController {

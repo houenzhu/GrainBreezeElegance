@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.service.commodity.CommoditySkuInfoService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Result;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @since 2024-07-13
  */
 @RestController
-@RequestMapping("/grain/skuInfo")
+@RequestMapping(ControllerConstant.API_PREFIX + "skuInfo")
 public class CommoditySkuInfoController {
     private final CommoditySkuInfoService commoditySkuInfoService;
 

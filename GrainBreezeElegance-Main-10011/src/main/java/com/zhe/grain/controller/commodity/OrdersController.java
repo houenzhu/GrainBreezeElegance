@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.domain.commodity.Orders;
 import com.zhe.grain.service.commodity.OrdersService;
 import com.zhe.grain.utils.PageUtils;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @since 2024-08-12
  */
 @RestController
-@RequestMapping("/grain/orders")
+@RequestMapping(ControllerConstant.API_PREFIX + "orders")
 public class OrdersController {
 
     private final OrdersService ordersService;

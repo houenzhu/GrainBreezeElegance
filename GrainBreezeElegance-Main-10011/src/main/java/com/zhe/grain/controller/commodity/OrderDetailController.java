@@ -1,9 +1,12 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.annotation.CheckArgs;
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.service.commodity.OrderDetailService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.commodity.OrderDetailVO;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +22,7 @@ import java.util.List;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping("/grain/orderDetail")
+@RequestMapping(ControllerConstant.API_PREFIX + "orderDetail")
 public class OrderDetailController {
     private final OrderDetailService orderDetailService;
 
@@ -30,10 +33,10 @@ public class OrderDetailController {
      */
     @GetMapping("/findById")
     @PreAuthorize("@zhe.hasAnyAuthority('sys:order:detail:id', 'user:order:detail:id')")
+    @CheckArgs
     public Result<OrderDetailVO> findById(@RequestParam("orderId") String orderId) {
-        OrderDetailVO orderDetailVO =
-                orderDetailService.getOrderDetailByOrderId(orderId);
-        return Result.success("OK", orderDetailVO);
+        OrderDetailVO orderDetailVO = orderDetailService.getOrderDetailByOrderId(orderId);
+        return Result.success(HttpStatus.OK.getReasonPhrase(), orderDetailVO);
     }
 
 }

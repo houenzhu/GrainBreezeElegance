@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.service.commodity.CommoditySpuInfoService;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.utils.Result;
@@ -19,7 +20,7 @@ import java.util.Map;
  * @since 2024-07-10
  */
 @RestController
-@RequestMapping("/grain/spuInfo")
+@RequestMapping(ControllerConstant.API_PREFIX + "spuInfo")
 public class CommoditySpuInfoController {
 
     private final CommoditySpuInfoService commoditySpuInfoService;

@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.domain.commodity.GrainCategoryEntity;
 import com.zhe.grain.service.commodity.GrainCommodityAttrgroupCategoryRelationService;
 import com.zhe.grain.utils.PageUtils;
@@ -21,7 +22,7 @@ import java.util.Map;
  * @since 2024-05-25
  */
 @RestController
-@RequestMapping("/grain/CommodityAttrgroupCategoryRelation")
+@RequestMapping(ControllerConstant.API_PREFIX + "CommodityAttrgroupCategoryRelation")
 public class GrainCommodityAttrgroupCategoryRelationController {
 
     @Autowired

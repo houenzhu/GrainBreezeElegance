@@ -1,5 +1,6 @@
 package com.zhe.grain.controller.commodity;
 
+import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.domain.commodity.GrainBrandEntity;
 import com.zhe.grain.exception.vaild.SaveGroup;
 import com.zhe.grain.service.commodity.GrainBrandService;
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("/grain/brand")
+@RequestMapping(ControllerConstant.API_PREFIX + "brand")
 @Slf4j
 public class GrainBrandController {
 

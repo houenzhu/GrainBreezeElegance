@@ -57,7 +57,7 @@ public class OrdersServiceImpl
         String customerName = (String) params.get("customerName");
         LambdaQueryWrapper<Orders> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         if (StringUtils.isNotBlank(orderId)) {
-            lambdaQueryWrapper.eq(Orders::getOrderId, orderId);
+            lambdaQueryWrapper.like(Orders::getOrderId, orderId);
         }
         if (StringUtils.isNoneBlank(customerName)) {
             List<Long> ids = userMapper.findIdByNickname(customerName);

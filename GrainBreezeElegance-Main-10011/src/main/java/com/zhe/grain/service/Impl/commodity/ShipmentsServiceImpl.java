@@ -37,10 +37,10 @@ public class ShipmentsServiceImpl extends ServiceImpl<ShipmentsMapper, Shipments
      */
     @Override
     public PageUtils page(Map<String, Object> params) {
-        String shipmentId = (String) params.get("shipmentId");
+        String orderId = (String) params.get("orderId");
         LambdaQueryWrapper<Shipments> queryWrapper = new LambdaQueryWrapper<>();
-        if (StringUtils.isNotBlank(shipmentId)) {
-            queryWrapper.eq(Shipments::getShipmentId, shipmentId);
+        if (StringUtils.isNotBlank(orderId)) {
+            queryWrapper.eq(Shipments::getOrderId, orderId);
         }
         IPage<Shipments> page = this.page(new Query<Shipments>().getPage(params), queryWrapper);
         return new PageUtils(page);
