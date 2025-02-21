@@ -17,6 +17,7 @@ import com.zhe.grain.vo.user.RegisterUserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -94,7 +95,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
                 .setCreateTime(LocalDateTime.now())
                 .setUpdateTime(LocalDateTime.now())
                 .setDelFlag(0)
-                .setPassword(encodePassword);
+                .setPassword(encodePassword)
+                .setAddress("");
         try {
             this.baseMapper.insert(sysUser);
             // 同时增加新增用户的角色关系
@@ -109,6 +111,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
             return true;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        SysUser sysUser = this.baseMapper.selectById(id);
+        UserDTO userDTO = new UserDTO();
+        BeanUtils.copyProperties(sysUser, userDTO);
+        return userDTO;
+    }
+
+    @Override
+    public void updateUser(RegisterUserVO userVO, Long id) {
+        SysUser sysUser = new SysUser();
+        try {
+            BeanUtils.copyProperties(userVO, sysUser);
+            sysUser.setId(id);
+            this.baseMapper.updateById(sysUser);
+        } catch (BeansException e) {
+            throw new RuntimeException("更新失败, 请重试");
         }
     }
 
