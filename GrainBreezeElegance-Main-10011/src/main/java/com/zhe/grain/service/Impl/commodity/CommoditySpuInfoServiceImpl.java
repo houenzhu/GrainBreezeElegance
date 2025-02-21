@@ -18,6 +18,7 @@ import com.zhe.grain.vo.commodity.BaseAttrs;
 import com.zhe.grain.vo.commodity.Images;
 import com.zhe.grain.vo.commodity.Skus;
 import com.zhe.grain.vo.commodity.SpuSaveVO;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +44,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @Service
 @Slf4j
+@AllArgsConstructor
 public class CommoditySpuInfoServiceImpl
         extends ServiceImpl<CommoditySpuInfoMapper, CommoditySpuInfo>
         implements CommoditySpuInfoService {
@@ -63,27 +65,6 @@ public class CommoditySpuInfoServiceImpl
 
     private final GrainCategoryMapper grainCategoryMapper;
     private final GrainBrandMapper grainBrandMapper;
-
-    @Autowired
-    public CommoditySpuInfoServiceImpl(SpuProvider spuProvider,
-                                       CommoditySpuInfoDescService commoditySpuInfoDescService,
-                                       CommoditySpuImagesService commoditySpuImagesService,
-                                       GrainCommodityAttrMapper grainCommodityAttrMapper,
-                                       CommodityProductAttrValueService commodityProductAttrValueService,
-                                       CommoditySkuInfoService commoditySkuInfoService,
-                                       CommoditySkuImagesService commoditySkuImagesService,
-                                       GrainCategoryMapper grainCategoryMapper,
-                                       GrainBrandMapper grainBrandMapper) {
-        this.spuProvider = spuProvider;
-        this.commoditySpuInfoDescService = commoditySpuInfoDescService;
-        this.commoditySpuImagesService = commoditySpuImagesService;
-        this.grainCommodityAttrMapper = grainCommodityAttrMapper;
-        this.commodityProductAttrValueService = commodityProductAttrValueService;
-        this.commoditySkuInfoService = commoditySkuInfoService;
-        this.commoditySkuImagesService = commoditySkuImagesService;
-        this.grainCategoryMapper = grainCategoryMapper;
-        this.grainBrandMapper = grainBrandMapper;
-    }
 
     @Override
     public void saveSpuInfo(SpuSaveVO spuSaveVO) {
