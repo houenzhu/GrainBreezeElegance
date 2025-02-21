@@ -1,20 +1,18 @@
-package com.zhe.grain.domain.commodity;
+package com.zhe.grain.vo.commodity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-import lombok.experimental.Accessors;
-
 /**
  * <p>
- * 农业咨询表
+ * 农业咨询VO表
  * </p>
  *
  * @author houen_zhu
@@ -24,13 +22,11 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@TableName("agriculture_consultations")
-public class AgricultureConsultations implements Serializable {
+public class AgricultureConsultationsVO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -66,9 +62,9 @@ public class AgricultureConsultations implements Serializable {
     private LocalDateTime updatedAt;
 
     /**
-     * 发布者的用户ID
+     * 发布者的用户名字
      */
-    private Integer authorId;
+    private String authorName;
 
     /**
      * 浏览次数
@@ -91,7 +87,12 @@ public class AgricultureConsultations implements Serializable {
     private Integer likesCount;
 
     /**
-     * 封面
+     * 咨询类型（1=科普，2=问答贴，3=技术性指导）
+     */
+    private Integer type;
+
+    /**
+     * 封面图
      */
     private String cover;
 }

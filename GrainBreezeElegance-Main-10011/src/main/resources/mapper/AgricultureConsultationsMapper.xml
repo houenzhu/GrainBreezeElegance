@@ -16,12 +16,30 @@
         <result column="comments_count" property="commentsCount" />
         <result column="tags" property="tags" />
         <result column="likes_count" property="likesCount" />
-        <result column="type" property="type" />
     </resultMap>
+    <insert id="insertRelationConTag">
+        insert into agriculture_consultation_tags values (#{relationId}, #{tagId})
+    </insert>
+    <select id="selectAllByTags" resultType="com.zhe.grain.domain.commodity.AgricultureConsultations">
+        SELECT ac.*
+        FROM agriculture_consultations ac
+                 JOIN agriculture_consultation_tags act ON ac.id = act.consultation_id
+            <if test="tag != null">
+                AND act.tag_id = #{tag}
+            </if>
+        order by ac.created_at desc
+        limit #{pageNum}, #{pageSize}
+    </select>
+    <select id="getTotalCountByTags" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            agriculture_consultations ac
+                JOIN agriculture_consultation_tags act ON ac.id = act.consultation_id
+        <if test="tag != null">
+            AND act.tag_id = #{tag}
+        </if>
+    </select>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, title, category, content, status, created_at, updated_at, author_id, view_count, comments_count, tags, likes_count, type
-    </sql>
 
 </mapper>
