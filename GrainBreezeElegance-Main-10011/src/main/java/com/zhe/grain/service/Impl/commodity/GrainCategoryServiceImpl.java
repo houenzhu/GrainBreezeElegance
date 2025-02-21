@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,8 +61,7 @@ public class GrainCategoryServiceImpl extends ServiceImpl<GrainCategoryMapper, G
                     .filter(categoryEntity -> categoryEntity.getParentId().equals(0L))
                     .map(grainCategoryEntity -> grainCategoryEntity.setChildren(this.getChildrenByParentId(all, grainCategoryEntity)))
                     // 升序排序
-                    .sorted((category1, category2) -> (category1.getSort() == null ? 0 : category1.getSort())
-                            - (category2.getSort() == null ? 0 : category2.getSort())
+                    .sorted(Comparator.comparingInt(category -> (category.getSort() == null ? 0 : category.getSort()))
                     )
                     .collect(Collectors.toList());
             redisCache.setCacheObject(RedisConstant.CATEGORY_LIST_TREE, listTree);
