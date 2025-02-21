@@ -18,4 +18,28 @@ public interface BaseService {
      * @return
      */
     PageUtils page(Map<String, Object> params);
+
+    /**
+     * 自定义获取总数
+     * @return
+     */
+    default Integer getTotalCount(Map<String, Object> params) {
+        return 0;
+    }
+
+    /**
+     * 自定义获取每页数量
+     * @return
+     */
+    default Integer getSize(Map<String, Object> params) {
+        return Integer.parseInt((String) params.get("limit"));
+    }
+
+    /**
+     * 自定义获取当前页
+     * @return
+     */
+    default Integer getCurrentPage(Map<String, Object> params) {
+        return Integer.parseInt((String) params.get("page"));
+    }
 }
