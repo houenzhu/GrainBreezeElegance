@@ -20,8 +20,9 @@ spring:
           min-idle: 5
           max-active: 8
   devtools:
-    livereload:
-      enabled: true
+    restart:
+      additional-paths: src/main/java
+      exclude: test/**
   rabbitmq:
     host: 192.168.56.100
     port: 5672
@@ -80,6 +81,11 @@ spring:
       matching-strategy: ant_path_matcher
   elasticsearch: # 配置ES地址
     uris: http://localhost:9200
+  ai:
+    ollama:
+      base-url: http://127.0.0.1:11434
+      chat:
+        model: deepseek-r1:7b
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml
   configuration:
