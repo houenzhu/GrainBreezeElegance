@@ -50,7 +50,6 @@ public class MenuJob {
                     Collection<String> keys = redisCache.keys(RedisConstant.USER_ENTITY_KEY + "*", 100);
                     // 强制退出所有的管理员, 进行重新登录
                     redisCache.deleteObject(keys);
-                    return;
                 }
             }
             for (String menuItem : userMenuItems) {
@@ -59,7 +58,6 @@ public class MenuJob {
                     Collection<String> keys = redisCache.keys(RedisConstant.USER_ENTITY_KEY + "*", 100);
                     // 强制退出所有的用户, 进行重新登录
                     redisCache.deleteObject(keys);
-                    return;
                 }
             }
         } catch (Exception e) {
