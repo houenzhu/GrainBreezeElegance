@@ -175,7 +175,21 @@
             <artifactId>easyexcel</artifactId>
             <version>4.0.3</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.ai</groupId>
+                    <artifactId>spring-ai-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-core</artifactId>
+            <version>1.0.0-Snapshot</version>
+        </dependency>
         <!--引入swagger2依赖-->
         <!--<dependency>-->
         <!--    <groupId>io.springfox</groupId>-->
@@ -206,7 +220,6 @@
         <!--    <version>4.1.0</version>-->
         <!--</dependency>-->
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
