@@ -20,6 +20,9 @@ spring:
         namespace: 169c3500-d0c4-431b-aa22-b0b33d8f7b74
   application:
     name: grain-breeze-elegance-service-10012
+  servlet:
+    multipart:
+      max-file-size: 10MB
 server:
   port: 10012
 
