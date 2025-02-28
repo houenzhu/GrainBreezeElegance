@@ -16,6 +16,7 @@
         <result column="comments_count" property="commentsCount" />
         <result column="tags" property="tags" />
         <result column="likes_count" property="likesCount" />
+        <result column="abstract_content" property="abstractContent"/>
     </resultMap>
     <insert id="insertRelationConTag">
         insert into agriculture_consultation_tags values (#{relationId}, #{tagId})

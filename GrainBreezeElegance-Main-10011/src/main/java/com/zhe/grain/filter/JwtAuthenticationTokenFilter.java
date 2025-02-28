@@ -1,7 +1,7 @@
 package com.zhe.grain.filter;
 
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.domain.LoginUser;
+import com.zhe.grain.domain.user.LoginUser;
 import com.zhe.grain.utils.JwtUtil;
 import com.zhe.grain.utils.RedisCache;
 import io.jsonwebtoken.Claims;
@@ -20,7 +20,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @version 1.0

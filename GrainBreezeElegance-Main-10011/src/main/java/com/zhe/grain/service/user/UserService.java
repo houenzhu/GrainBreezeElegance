@@ -1,7 +1,7 @@
 package com.zhe.grain.service.user;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.dto.UserDTO;
 import com.zhe.grain.utils.PageUtils;
 import com.zhe.grain.vo.user.RegisterUserVO;

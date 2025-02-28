@@ -5,7 +5,6 @@ import com.zhe.grain.service.aichat.TongYiService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.tongyi.Message;
 import com.zhe.grain.vo.tongyi.TongYiResultVO;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
@@ -16,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
-
-import java.net.http.HttpResponse;
-import java.nio.charset.CharsetEncoder;
 
 /**
  * @version 1.0

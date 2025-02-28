@@ -2,14 +2,13 @@ package com.zhe.grain.service.Impl.user;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.domain.LoginUser;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.LoginUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.mapper.user.MenuMapper;
 import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.utils.RedisCache;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

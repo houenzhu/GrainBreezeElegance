@@ -1,6 +1,6 @@
 package com.zhe.grain.expression;
 
-import com.zhe.grain.domain.LoginUser;
+import com.zhe.grain.domain.user.LoginUser;
 import com.zhe.grain.utils.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -8,7 +8,7 @@ import com.alibaba.dashscope.exception.ApiException;
 import com.alibaba.dashscope.exception.InputRequiredException;
 import com.alibaba.dashscope.exception.NoApiKeyException;
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.domain.LoginUser;
+import com.zhe.grain.domain.user.LoginUser;
 import com.zhe.grain.exception.AIException;
 import com.zhe.grain.service.aichat.TongYiService;
 import com.zhe.grain.utils.AIUtil;

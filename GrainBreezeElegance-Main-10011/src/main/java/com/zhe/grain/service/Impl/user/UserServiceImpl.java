@@ -4,8 +4,9 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zhe.feign.UserFeign;
 import com.zhe.grain.dto.UserDTO;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.domain.user.SysUserRole;
 import com.zhe.grain.mapper.user.SysUserRoleMapper;
 import com.zhe.grain.mapper.user.UserMapper;
@@ -18,7 +19,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser>
 
     private final PasswordEncoder passwordEncoder;
     private final SysUserRoleMapper sysUserRoleMapper;
+    private final UserFeign userFeign;
     private static final String DEFAULT_USER_AVATAR =
             "https://zheliving-10000.oss-cn-guangzhou.aliyuncs.com/%E5%8F%AF%E7%88%B1%E8%B6%85%E4%BA%BA%E8%B4%B4%E7%BA%B8.png";
 

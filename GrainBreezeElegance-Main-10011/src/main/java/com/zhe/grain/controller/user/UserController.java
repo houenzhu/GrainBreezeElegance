@@ -66,4 +66,5 @@ public class UserController {
         userService.updateUser(userVO, id);
         return Result.success();
     }
+
 }

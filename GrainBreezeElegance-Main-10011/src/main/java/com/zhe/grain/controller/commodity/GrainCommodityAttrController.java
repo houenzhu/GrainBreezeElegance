@@ -1,6 +1,5 @@
 package com.zhe.grain.controller.commodity;
 
-import com.zhe.grain.annotation.CheckArgs;
 import com.zhe.grain.constant.ControllerConstant;
 import com.zhe.grain.domain.commodity.GrainCommodityAttr;
 import com.zhe.grain.service.commodity.GrainCommodityAttrService;
@@ -9,6 +8,7 @@ import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.commodity.BaseAttrAcceptVO;
 import com.zhe.grain.vo.commodity.BaseAttrFormVO;
 import com.zhe.grain.vo.commodity.GrainCommodityAttrVO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +27,10 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping(ControllerConstant.API_PREFIX + "grainCommodityAttr")
+@AllArgsConstructor
 public class GrainCommodityAttrController {
 
-    @Autowired
-    private GrainCommodityAttrService grainCommodityAttrService;
+    private final GrainCommodityAttrService grainCommodityAttrService;
 
     /**
      * 分页查询基本属性

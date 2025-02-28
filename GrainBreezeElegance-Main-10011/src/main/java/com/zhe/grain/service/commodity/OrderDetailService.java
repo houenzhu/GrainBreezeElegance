@@ -1,10 +1,8 @@
 package com.zhe.grain.service.commodity;
 
-import com.zhe.grain.domain.commodity.CommoditySkuInfo;
 import com.zhe.grain.domain.commodity.OrderDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhe.grain.domain.commodity.Orders;
-import com.zhe.grain.service.common.BaseService;
 import com.zhe.grain.vo.commodity.OrderDetailVO;
 import com.zhe.grain.vo.commodity.SkusInfoVO;
 

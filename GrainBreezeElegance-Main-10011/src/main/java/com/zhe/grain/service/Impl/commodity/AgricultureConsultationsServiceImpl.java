@@ -1,9 +1,5 @@
 package com.zhe.grain.service.Impl.commodity;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zhe.grain.domain.SysUser;
 import com.zhe.grain.domain.commodity.AgricultureConsultations;
 import com.zhe.grain.mapper.commodity.AgricultureConsultationTagsMapper;
 import com.zhe.grain.mapper.commodity.AgricultureConsultationsMapper;
@@ -12,22 +8,18 @@ import com.zhe.grain.mapper.user.UserMapper;
 import com.zhe.grain.record.AgricultureConsultationsRecord;
 import com.zhe.grain.service.commodity.AgricultureConsultationsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zhe.grain.service.common.BaseService;
 import com.zhe.grain.utils.PageUtils;
-import com.zhe.grain.utils.Query;
 import com.zhe.grain.utils.SecurityUtil;
 import com.zhe.grain.vo.commodity.AgricultureConsultationsVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * <p>

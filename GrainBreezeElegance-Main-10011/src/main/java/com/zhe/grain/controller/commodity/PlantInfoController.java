@@ -2,7 +2,6 @@ package com.zhe.grain.controller.commodity;
 
 import com.zhe.grain.annotation.CheckArgs;
 import com.zhe.grain.constant.ControllerConstant;
-import com.zhe.grain.domain.commodity.PlantInfo;
 import com.zhe.grain.dto.PlantInfoDTO;
 import com.zhe.grain.service.commodity.PlantInfoService;
 import com.zhe.grain.utils.PageUtils;

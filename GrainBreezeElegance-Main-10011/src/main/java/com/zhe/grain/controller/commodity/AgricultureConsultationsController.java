@@ -2,7 +2,6 @@ package com.zhe.grain.controller.commodity;
 
 import com.zhe.grain.annotation.CheckArgs;
 import com.zhe.grain.constant.ControllerConstant;
-import com.zhe.grain.domain.commodity.AgricultureConsultations;
 import com.zhe.grain.record.AgricultureConsultationsRecord;
 import com.zhe.grain.service.commodity.AgricultureConsultationsService;
 import com.zhe.grain.utils.PageUtils;

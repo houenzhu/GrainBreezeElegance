@@ -2,8 +2,8 @@ package com.zhe.grain.service.Impl.user;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.domain.LoginUser;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.LoginUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.mapper.user.LoginUserMapper;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.*;

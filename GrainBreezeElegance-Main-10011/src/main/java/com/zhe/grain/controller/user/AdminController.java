@@ -5,8 +5,6 @@ import com.zhe.grain.domain.user.AdminEntity;
 import com.zhe.grain.service.user.AdminService;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

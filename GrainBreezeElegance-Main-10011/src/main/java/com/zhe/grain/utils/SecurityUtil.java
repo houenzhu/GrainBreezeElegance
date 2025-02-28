@@ -1,6 +1,6 @@
 package com.zhe.grain.utils;
 
-import com.zhe.grain.domain.LoginUser;
+import com.zhe.grain.domain.user.LoginUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**

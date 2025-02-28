@@ -2,8 +2,7 @@ package com.zhe.grain.controller.user;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.GifCaptcha;
-import cn.hutool.captcha.LineCaptcha;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.service.user.LoginUserService;
 import com.zhe.grain.utils.Result;
 import com.zhe.grain.vo.user.AdminLoginVO;

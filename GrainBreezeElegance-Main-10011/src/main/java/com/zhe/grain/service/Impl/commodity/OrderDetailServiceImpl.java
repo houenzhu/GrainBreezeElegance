@@ -1,9 +1,8 @@
 package com.zhe.grain.service.Impl.commodity;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.zhe.grain.domain.SysUser;
+import com.zhe.grain.domain.user.SysUser;
 import com.zhe.grain.domain.commodity.CommoditySkuImages;
 import com.zhe.grain.domain.commodity.CommoditySkuInfo;
 import com.zhe.grain.domain.commodity.OrderDetail;

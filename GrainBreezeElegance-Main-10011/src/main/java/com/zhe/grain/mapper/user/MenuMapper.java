@@ -1,7 +1,7 @@
 package com.zhe.grain.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.zhe.grain.domain.Menu;
+import com.zhe.grain.domain.user.Menu;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

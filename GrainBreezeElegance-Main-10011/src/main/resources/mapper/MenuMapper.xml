@@ -14,7 +14,7 @@
           AND u.`status` = 0
           AND m.`status` = 0
     </select>
-    <select id="selectPermsByUserIdOrderByDesc" resultType="com.zhe.grain.domain.Menu">
+    <select id="selectPermsByUserIdOrderByDesc" resultType="com.zhe.grain.domain.user.Menu">
         SELECT DISTINCT
             m.id,
             m.perms
