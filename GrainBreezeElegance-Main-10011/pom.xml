@@ -103,11 +103,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-captcha -->
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -123,9 +118,12 @@
                     <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                     <groupId>com.baomidou</groupId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
-
         <!--阿里通义千问依赖-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -169,12 +167,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.alibaba/easyexcel -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>easyexcel</artifactId>
-            <version>4.0.3</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-ollama-spring-boot-starter</artifactId>
@@ -190,35 +182,25 @@
             <artifactId>spring-ai-core</artifactId>
             <version>1.0.0-Snapshot</version>
         </dependency>
-        <!--引入swagger2依赖-->
-        <!--<dependency>-->
-        <!--    <groupId>io.springfox</groupId>-->
-        <!--    <artifactId>springfox-swagger-ui</artifactId>-->
-        <!--    <version>3.0.0</version>-->
-        <!--    <exclusions>-->
-        <!--        <exclusion>-->
-        <!--            <artifactId>guava</artifactId>-->
-        <!--            <groupId>com.google.guava</groupId>-->
-        <!--        </exclusion>-->
-        <!--    </exclusions>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--    <groupId>io.springfox</groupId>-->
-        <!--    <artifactId>springfox-swagger2</artifactId>-->
-        <!--    <version>3.0.0</version>-->
-        <!--    <exclusions>-->
-        <!--        <exclusion>-->
-        <!--            <artifactId>guava</artifactId>-->
-        <!--            <groupId>com.google.guava</groupId>-->
-        <!--        </exclusion>-->
-        <!--    </exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--    <groupId>com.github.xiaoymin</groupId>-->
-        <!--    <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>-->
-        <!--    <version>4.1.0</version>-->
-        <!--</dependency>-->
+        <!--引入mongodb-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--loadbalancer-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zhe</groupId>
+            <artifactId>grain-user-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
