@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import lombok.*;
-import lombok.experimental.Accessors;
-import org.apache.ibatis.annotations.Delete;
 
 /**
  * <p>

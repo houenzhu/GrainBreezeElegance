@@ -3,24 +3,27 @@ package com.zhe.grain.domain.commodity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
- * 属性分组与分类关联表
+ * 品牌分类关联表
  * </p>
  *
  * @author houen_zhu
- * @since 2024-05-25
+ * @since 2024-05-11
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Accessors(chain = true)
-@TableName("grain_commodity_attrgroup_category_relation")
-public class GrainCommodityAttrgroupCategoryRelation implements Serializable {
+@TableName("grain_category_brand_relation")
+public class GrainCategoryBrandRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,9 +34,9 @@ public class GrainCommodityAttrgroupCategoryRelation implements Serializable {
     private Long id;
 
     /**
-     * 属性分组id
+     * 品牌id
      */
-    private Long attrGroupId;
+    private Long brandId;
 
     /**
      * 分类id
@@ -41,9 +44,9 @@ public class GrainCommodityAttrgroupCategoryRelation implements Serializable {
     private Long categoryId;
 
     /**
-     * 属性分组名称
+     * 品牌名称
      */
-    private String attrName;
+    private String brandName;
 
     /**
      * 分类名称

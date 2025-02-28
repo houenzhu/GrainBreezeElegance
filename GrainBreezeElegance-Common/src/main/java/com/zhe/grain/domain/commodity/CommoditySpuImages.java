@@ -3,25 +3,25 @@ package com.zhe.grain.domain.commodity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
- * 品牌分类关联表
+ * spu 图片集
  * </p>
  *
  * @author houen_zhu
- * @since 2024-05-11
+ * @since 2024-07-11
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
-@TableName("grain_category_brand_relation")
-public class GrainCategoryBrandRelation implements Serializable {
+@TableName("commodity_spu_images")
+public class CommoditySpuImages implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,22 +32,27 @@ public class GrainCategoryBrandRelation implements Serializable {
     private Long id;
 
     /**
-     * 品牌id
+     * spu_id
      */
-    private Long brandId;
+    private Long spuId;
 
     /**
-     * 分类id
+     * 图片名
      */
-    private Long categoryId;
+    private String imgName;
 
     /**
-     * 品牌名称
+     * 图片地址
      */
-    private String brandName;
+    private String imgUrl;
 
     /**
-     * 分类名称
+     * 顺序
      */
-    private String categoryName;
+    private Integer imgSort;
+
+    /**
+     * 是否默认图
+     */
+    private Integer defaultImg;
 }

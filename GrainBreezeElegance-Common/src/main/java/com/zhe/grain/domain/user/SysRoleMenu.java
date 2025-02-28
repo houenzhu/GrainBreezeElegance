@@ -3,10 +3,12 @@ package com.zhe.grain.domain.user;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,27 +16,30 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author houen_zhu
- * @since 2024-07-23
+ * @since 2024-07-28
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@TableName("sys_user_role")
-public class SysUserRole implements Serializable {
+@TableName("sys_role_menu")
+public class SysRoleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(type = IdType.AUTO, value = "id")
-    private Long id;
-
     /**
-     * 用户id
-     */
-    private Long userId;
-
-    /**
-     * 角色id
+     * 角色ID
      */
     private Long roleId;
+
+    /**
+     * 菜单id
+     */
+    private Long menuId;
+
+    /**
+     * id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 }

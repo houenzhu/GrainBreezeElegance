@@ -3,14 +3,15 @@ package com.zhe.grain.domain.commodity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -94,4 +95,9 @@ public class AgricultureConsultations implements Serializable {
      * 封面
      */
     private String cover;
+
+    /**
+     * 摘要
+     */
+    private String abstractContent;
 }

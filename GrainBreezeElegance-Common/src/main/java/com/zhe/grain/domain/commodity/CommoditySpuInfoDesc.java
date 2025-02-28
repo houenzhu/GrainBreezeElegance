@@ -3,34 +3,41 @@ package com.zhe.grain.domain.commodity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * <p>
- * 农业咨询与标签的关联表
+ * 商品spu信息介绍
  * </p>
  *
  * @author houen_zhu
- * @since 2025-01-14
+ * @since 2024-07-10
  */
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName("agriculture_consultation_tags")
-public class AgricultureConsultationTags implements Serializable {
+@TableName("commodity_spu_info_desc")
+public class CommoditySpuInfoDesc implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 农业咨询ID
+     * id
      */
-    private Integer consultationId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
     /**
-     * 标签ID
+     * 商品 id
      */
-    private Integer tagId;
+    private Long spuId;
+
+    /**
+     * 商品介绍图片
+     */
+    private String decript;
 }

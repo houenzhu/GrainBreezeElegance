@@ -3,26 +3,30 @@ package com.zhe.grain.domain.commodity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.io.Serial;
+import java.io.Serializable;
 
 /**
  * <p>
- * 商品属性分组
+ * 销售属性和品牌关联表
  * </p>
  *
  * @author houen_zhu
- * @since 2024-05-25
+ * @since 2024-07-12
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-@TableName("grain_commodity_attrgroup")
-public class GrainCommodityAttrgroup implements Serializable {
+@TableName("grain_sale_attr_brand_relation")
+public class GrainSaleAttrBrandRelation implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     /**
@@ -32,14 +36,17 @@ public class GrainCommodityAttrgroup implements Serializable {
     private Long id;
 
     /**
-     * 组名
+     * 销售属性id
      */
-    private String name;
+    private Long saleAttrId;
 
     /**
-     * 说明
+     * 关联品牌id
      */
-    private String description;
+    private Long brandId;
 
-
+    /**
+     * 品牌名
+     */
+    private String brandName;
 }
