@@ -14,6 +14,7 @@
         <module>GrainBreezeElegance-Main-10011</module>
         <module>GrainBreezeElegance-OssService-10012</module>
         <module>GrainBreezeElegance-Common</module>
+        <module>GrainBreezeElegance-Service-Api</module>
     </modules>
 
     <properties>
