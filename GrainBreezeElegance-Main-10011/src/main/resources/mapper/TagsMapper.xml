@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhe.grain.mapper.commodity.TagsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.zhe.grain.domain.commodity.Tags">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="description" property="description" />
+        <result column="created_at" property="createdAt" />
+        <result column="order" property="order"/>
+    </resultMap>
+    <sql id="column">
+        id, name, description, created_at, `order`
+    </sql>
+    <select id="list" resultType="com.zhe.grain.domain.commodity.Tags">
+        select * from tags order by `order`
+    </select>
+    <select id="selectById" resultType="com.zhe.grain.domain.commodity.Tags">
+        SELECT id, name, description, `order`
+        FROM tags
+        WHERE id = #{id}
+    </select>
+
+
+</mapper>
