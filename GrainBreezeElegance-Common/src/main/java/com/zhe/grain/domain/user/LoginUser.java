@@ -1,4 +1,4 @@
-package com.zhe.grain.domain;
+package com.zhe.grain.domain.user;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;

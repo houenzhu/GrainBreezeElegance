@@ -1,17 +1,15 @@
 package com.zhe.grain.job;
 
 import com.zhe.grain.constant.RedisConstant;
-import com.zhe.grain.domain.Menu;
+import com.zhe.grain.domain.user.Menu;
 import com.zhe.grain.mapper.user.MenuMapper;
 import com.zhe.grain.utils.RedisCache;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 /**

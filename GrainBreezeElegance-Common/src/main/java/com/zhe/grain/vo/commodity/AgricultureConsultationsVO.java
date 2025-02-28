@@ -95,4 +95,6 @@ public class AgricultureConsultationsVO implements Serializable {
      * 封面图
      */
     private String cover;
+
+    private String abstractContent;
 }

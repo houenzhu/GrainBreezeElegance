@@ -2,9 +2,6 @@
   * Copyright 2021 json.cn
   */
 package com.zhe.grain.vo.commodity;
-import com.zhe.grain.vo.commodity.Attr;
-import com.zhe.grain.vo.commodity.Images;
-import com.zhe.grain.vo.commodity.MemberPrice;
 import lombok.Data;
 
 import java.math.BigDecimal;

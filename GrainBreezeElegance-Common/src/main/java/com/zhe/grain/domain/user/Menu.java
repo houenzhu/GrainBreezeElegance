@@ -1,4 +1,4 @@
-package com.zhe.grain.domain;
+package com.zhe.grain.domain.user;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
